@@ -1,12 +1,13 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
-//import '../models/models.dart';
 import '../components/components.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import '../providers/providers.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -23,7 +24,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late FocusNode secondPasswordFocusNode;
   late FocusNode emailFocusNode;
   late FocusNode passwordFocusNode;
-  bool showPassword = false;
+  bool hidePassword = true;
+  String? password;
+  String? email;
+
   @override
   void initState() {
     emailFocusNode = FocusNode();
@@ -43,6 +47,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
+  void validateAndSave() {
+    final form = _formKey.currentState;
+    if (form!.validate()) {
+      Provider.of<ProductsManager>(context, listen: false)
+          .setEmailPassword(emailController.text, passwordController.text);
+      Navigator.pushReplacementNamed(context, '/second_sign_up');
+    } else {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -50,202 +65,279 @@ class _SignUpScreenState extends State<SignUpScreen> {
     var width = size.width;
     var q = min(height, width);
     return SafeArea(
-      child: Scaffold(
-        //resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          reverse: true,
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
-                  child: Text(
-                    'SIGN UP',
-                    style: GoogleFonts.archivoBlack(
-                      color: Colors.black,
-                      fontSize: q / 20,
-                      fontWeight: FontWeight.bold,
+      child: Consumer<ProductsManager>(builder: (context, manager, child) {
+        bool isEng = manager.getLocal();
+        return Scaffold(
+          //resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.white,
+          body: SingleChildScrollView(
+            reverse: true,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 15, left: 15, right: 15),
+                    child: Text(
+                      isEng ? 'SIGN UP' : 'إنشاء حساب',
+                      style: GoogleFonts.archivoBlack(
+                        color: Colors.black,
+                        fontSize: q / 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 5,
-                  ),
-                  child: SizedBox(
-                    height: height / 3,
-                    width: width,
-                    child: Image.asset(
-                      'assets/signup.jpg',
-                      semanticLabel: 'login',
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 5,
+                    ),
+                    child: SizedBox(
                       height: height / 3,
                       width: width,
+                      child: Image.asset(
+                        'assets/signup.jpg',
+                        semanticLabel: 'login',
+                        height: height / 3,
+                        width: width,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15, right: 15, top: 15, bottom: 10),
-                  child: RoundedContainer(
-                    textFrom: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 12, right: 12, bottom: 5),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 27, vertical: 15),
+                    child: Directionality(
+                      textDirection:
+                          isEng ? TextDirection.ltr : TextDirection.rtl,
                       child: TextFormField(
+                        validator: (text) {
+                          if (text == null || text == '') {
+                            return isEng
+                                ? 'Cannot be empty'
+                                : 'لا يمكن أن يكون فارغ';
+                          }
+                          if (text.length <= 4) {
+                            return isEng
+                                ? 'Invalid Email'
+                                : 'بريد إلكتروني خاطئ';
+                          }
+                          if (!text.contains('@') || !text.contains('.')) {
+                            return isEng
+                                ? 'Invalid Email format'
+                                : 'صيغة بريد إلكتروني خاطئة';
+                          }
+                          return null;
+                        },
                         controller: emailController,
                         focusNode: emailFocusNode,
                         cursorColor: Colors.black,
                         decoration: InputDecoration(
-                          hintText: 'Enter your Email',
-                          icon: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: FaIcon(
-                              FontAwesomeIcons.solidUserCircle,
-                              color: Colors.black,
-                              size: q / 25,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(
+                                width: 2,
+                              ),
                             ),
-                          ),
-                          border: InputBorder.none,
-                        ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: const BorderSide(
+                                  width: 2, color: Colors.black26),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(
+                                width: 2,
+                                color: Colors.blueGrey,
+                              ),
+                            ),
+                            hintText: isEng
+                                ? 'Enter your Email'
+                                : 'أدخل بريدك الإلكتروني',
+                            icon: FaIcon(
+                              Icons.email_rounded,
+                              color: Colors.black,
+                              size: q / 22,
+                            ),
+                            fillColor: Colors.blueGrey),
                       ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                  child: RoundedContainer(
-                    textFrom: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 12, right: 12, bottom: 5),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 27, vertical: 10),
+                    child: Directionality(
+                      textDirection:
+                          isEng ? TextDirection.ltr : TextDirection.rtl,
                       child: TextFormField(
-                        obscureText: showPassword,
+                        obscureText: hidePassword,
                         controller: passwordController,
                         focusNode: passwordFocusNode,
                         cursorColor: Colors.black,
                         decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Enter your password',
-                          icon: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: FaIcon(
-                              FontAwesomeIcons.lock,
-                              color: Colors.black,
-                              size: q / 25,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                              width: 2,
                             ),
                           ),
-                          suffixIcon: Padding(
-                            padding: const EdgeInsets.only(right: 7),
-                            child: IconButton(
-                              padding: const EdgeInsets.only(top: 5),
-                              onPressed: () {
-                                setState(() {
-                                  showPassword = !showPassword;
-                                });
-                              },
-                              icon: Icon(showPassword
-                                  ? Ionicons.eye_outline
-                                  : Ionicons.eye),
-                              iconSize: q / 20,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(
+                                width: 2, color: Colors.black26),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                              width: 2,
+                              color: Colors.blueGrey,
                             ),
                           ),
+                          hintText:
+                              isEng ? 'Enter your password' : 'أدخل كلمة السر',
+                          icon: FaIcon(
+                            FontAwesomeIcons.lock,
+                            color: Colors.black,
+                            size: q / 22,
+                          ),
+                          suffixIcon: IconButton(
+                            color: Colors.grey,
+                            padding: const EdgeInsets.only(right: 10),
+                            onPressed: () {
+                              setState(() {
+                                hidePassword = !hidePassword;
+                              });
+                            },
+                            icon: Icon(!hidePassword
+                                ? Icons.remove_red_eye_rounded
+                                : Ionicons.eye_off),
+                            iconSize: q / 20,
+                          ),
+                          suffixStyle: const TextStyle(color: Colors.black),
                         ),
+                        validator: (text) {
+                          if (text == '') {
+                            return isEng
+                                ? 'cant be empty'
+                                : 'لا يمكن أن يكون فارغ';
+                          }
+                        },
                       ),
                     ),
                   ),
-                ),
-                Padding(
-                  //top:20,left:15,right:15,bottom:10
-                  padding: const EdgeInsets.only(
-                      top: 25, left: 15, right: 15, bottom: 17),
-                  child: RoundedContainer(
-                    textFrom: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 12, right: 12, bottom: 5),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 27, vertical: 15),
+                    child: Directionality(
+                      textDirection:
+                      isEng ? TextDirection.ltr : TextDirection.rtl,
                       child: TextFormField(
-                        obscureText: showPassword,
+                        validator: (text) {
+                          if (text == '') {
+                            return isEng
+                                ? 'cant be empty'
+                                : 'لا يمكن أن يكون فارغ';
+                          }
+                          if (text != passwordController.text) {
+                            return isEng
+                                ? 'check your password'
+                                : 'تأكد من كلمة السر الخاصة بك';
+                          }
+                        },
+                        obscureText: hidePassword,
                         controller: secondPasswordController,
                         focusNode: secondPasswordFocusNode,
                         cursorColor: Colors.black,
                         decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Confirm your password',
-                          icon: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: FaIcon(
-                              FontAwesomeIcons.lock,
-                              color: Colors.black,
-                              size: q / 25,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                              width: 2,
                             ),
                           ),
-                          suffixIcon: Padding(
-                            padding: const EdgeInsets.only(right: 7),
-                            child: IconButton(
-                              padding: const EdgeInsets.only(top: 5),
-                              onPressed: () {
-                                setState(() {
-                                  showPassword = !showPassword;
-                                });
-                              },
-                              icon: Icon(showPassword
-                                  ? Ionicons.eye_outline
-                                  : Ionicons.eye),
-                              iconSize: q / 20,
-                            ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide:
+                                const BorderSide(width: 2, color: Colors.black26),
                           ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5),
-                  child: AnimatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(
-                          context, '/second_sign_up');
-                    },
-                    child: Text(
-                      'Sign up',
-                      style: GoogleFonts.arya(
-                          fontSize: q / 22, color: Colors.white),
-                    ),
-                    color: Colors.blueGrey,
-                    width: width / 4,
-                    height: height / 14,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Already have an account?",
-                        style: GoogleFonts.actor(
-                            color: Colors.black, fontSize: q / 23),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.popAndPushNamed(context, '/log_in');
-                        },
-                        child: Text(
-                          'Log in',
-                          style: GoogleFonts.actor(
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                              width: 2,
                               color: Colors.blueGrey,
-                              fontSize: q / 20,
-                              fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          hintText:
+                              isEng ? 'Confirm your password' : 'تأكيد كلمة السر',
+                          icon: FaIcon(
+                            FontAwesomeIcons.lock,
+                            color: Colors.black,
+                            size: q / 22,
+                          ),
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: AnimatedButton(
+                      onPressed: validateAndSave,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            isEng ? 'Continue' : 'إستمرار',
+                            style: GoogleFonts.arya(
+                                fontSize: q / 24, color: Colors.white),
+                          ),
+                          const FaIcon(
+                            FontAwesomeIcons.angleDoubleRight,
+                            color: Colors.white,
+                          )
+                        ],
+                      ),
+                      color: Colors.blueGrey,
+                      width: width / 4,
+                      height: height / 14,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: Directionality(
+                      textDirection:
+                      isEng ? TextDirection.ltr : TextDirection.rtl,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            isEng
+                                ? "Already have an account?"
+                                : 'لديك حساب مسجل مسبقا؟',
+                            style: GoogleFonts.actor(
+                                color: Colors.black, fontSize: q / 23),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.popAndPushNamed(context, '/log_in');
+                            },
+                            child: Text(
+                              isEng ? 'Log in' : 'تسجيل الدخول',
+                              style: GoogleFonts.actor(
+                                  color: Colors.blueGrey,
+                                  fontSize: q / 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

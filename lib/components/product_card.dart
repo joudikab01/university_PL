@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../models/models.dart';
 
 class ProductCard extends StatelessWidget {
-  final Product productModel;
-  const ProductCard({required this.productModel, Key? key}) : super(key: key);
+  final Product product;
+  const ProductCard({required this.product, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,33 +21,33 @@ class ProductCard extends StatelessWidget {
         ),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             constraints: BoxConstraints(
-              maxWidth: width / 3,
-              maxHeight: height / 5,
+              maxWidth: width / 2,
+              maxHeight: height / 5.3,
             ),
             decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(16)),
+                borderRadius: const BorderRadius.only(topLeft:Radius.circular(16),topRight:Radius.circular(16) ),
                 image: DecorationImage(
-                  image: AssetImage(
-                    productModel.image,
+                  image: NetworkImage(
+                    product.image,
                   ),
                   fit: BoxFit.cover,
                 )),
           ),
+          const SizedBox(height: 10,),
           Text(
-            productModel.name,
+            product.name,
             style: GoogleFonts.adamina(
-                fontSize: q / 29, fontWeight: FontWeight.w100),
+                fontSize: q / 35, fontWeight: FontWeight.w100),
           ),
           Text(
-            ///TODO:edit
-            '${productModel.price}',
+            '${product.price}',
             style: GoogleFonts.adamina(
-                fontSize: q / 29, fontWeight: FontWeight.w100),
+                fontSize: q / 35, fontWeight: FontWeight.w100),
           ),
         ],
       ),

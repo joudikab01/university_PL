@@ -42,6 +42,15 @@ dependencies:
   animated_button:
   flutter_svg_provider:
   intl:
+  flip_card:
+  like_button:
+  bouncing_widget:
+  hive:
+  hive_flutter:
+  animated_flip_counter:
+  curved_navigation_bar:
+  fluttertoast: ^8.0.9
+
 
 
 
@@ -55,6 +64,7 @@ dev_dependencies:
   retrofit_generator:
   json_serializable:
   build_runner:
+  hive_generator:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

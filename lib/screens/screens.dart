@@ -9,3 +9,4 @@ export 'second_sign_up.dart';
 export 'profile.dart';
 export 'home.dart';
 export 'add_product.dart';
+export 'categories.dart';
