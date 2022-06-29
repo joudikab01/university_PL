@@ -9,6 +9,6 @@ export 'category_card.dart';
 export 'categories_list_view.dart';
 export 'sorted_products_list_view.dart';
 export 'sorted_prooduct_card.dart';
-export 'search_card.dart';
+export 'user_product.dart';
 export 'comments_list_view.dart';
 export 'comment_tile.dart';

@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../screens/sorted_product.dart';
 import 'models/boxes.dart';
+import 'models/signup_models/user.dart';
 import 'providers/providers.dart';
 import 'screens/screens.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  Hive.registerAdapter(UserSignAdapter());
   await Hive.openBox<bool>('local');
   await Hive.openBox<String>('auth');
-  await Hive.openBox<bool>('isLogged');
   await Hive.openBox<bool>('isLiked');
+  await Hive.openBox<UserSign>('user');
   runApp(const MyApp());
 }
 

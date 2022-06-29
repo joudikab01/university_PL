@@ -203,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 hidePassword = !hidePassword;
                               });
                             },
-                            icon: Icon(hidePassword
+                            icon: Icon(!hidePassword
                                 ? Icons.remove_red_eye_rounded
                                 : Ionicons.eye_off),
                             iconSize: q / 16,
@@ -229,20 +229,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Provider.of<ProductsManager>(context,
                                       listen: false)
                                   .setToken(login.token);
-                              // String token = Provider.of<ProductsManager>(
-                              //         context,
-                              //         listen: false)
-                              //     .getToken();
-                              // print('login token is ${login.token}');
-                              // print('hive token is ${token}');
-                              ///TODO: edit
-                              var box2 = Boxes.getLogBox();
-                              box2.clear();
-                              box2.put('isLogged', true);
-                              Provider.of<ProductsManager>(context,
-                                      listen: false)
-                                  .setProfile(login.user);
-
+                              Provider.of<ProductsManager>(context,listen: false).setUser(login.user);
                               Navigator.pushReplacementNamed(context, '/home');
                             }
                           } catch (e) {

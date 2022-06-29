@@ -251,6 +251,67 @@ class _DataService implements DataService {
     return null;
   }
 
+  @override
+  Future<UserProducts> getUserProducts(id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UserProducts>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/products/user_Products/${id}',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UserProducts.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<void> deleteAccount(id, token) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    await _dio.fetch<void>(_setStreamType<void>(
+        Options(method: 'DELETE', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/auth/deleteUser/${id}',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    return null;
+  }
+
+  @override
+  Future<void> deleteComment(id, token) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    await _dio.fetch<void>(_setStreamType<void>(
+        Options(method: 'DELETE', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/comments/${id}',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    return null;
+  }
+
+  @override
+  Future<void> updateComment(id, token, formData) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    await _dio.fetch<void>(_setStreamType<void>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/comments/${id}',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    return null;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

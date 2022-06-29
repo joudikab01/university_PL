@@ -38,7 +38,7 @@ class ProductDetails {
   @JsonKey(name: 'new_price')
   double newPrice;
   Category category;
-  User user;
+  UserSign user;
   List<Like> likes;
   List<Comment> comments;
   bool? isFav=false;

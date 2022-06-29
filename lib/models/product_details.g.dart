@@ -31,7 +31,7 @@ ProductDetails _$ProductDetailsFromJson(Map<String, dynamic> json) =>
           .map((e) => Like.fromJson(e as Map<String, dynamic>))
           .toList(),
       newPrice: (json['new_price'] as num).toDouble(),
-      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      user: UserSign.fromJson(json['user'] as Map<String, dynamic>),
       isFav: json['isFav'] as bool?,
     );
 

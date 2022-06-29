@@ -39,28 +39,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
           builder: (BuildContext context, AsyncSnapshot<DataHome> snapshot) {
             DataHome data = snapshot.data ??
                 DataHome(products: [
-                  // Product(
-                  //     name: '',
-                  //     image: '',
-                  //     expireDate: '',
-                  //     categoryId: 0,
-                  //     ownerId: 0,
-                  //     contactNumber: '',
-                  //     quantity: 0,
-                  //     price: 0,
-                  //     facebookUrl: '',
-                  //     countViews: 0,
-                  //     id: 0,
-                  //     category: Category(
-                  //         id: 0,
-                  //         name: '',
-                  //         createdAt: '',
-                  //         updatedAt: '',
-                  //         imageUrl: ''),
-                  //     commentsCount: 0,
-                  //     likesCount: 0,
-                  //     updatedAt: '',
-                  //     createdAt: '')
                 ]);
             // if (snapshot.connectionState == ConnectionState.done) {
             bool isEng = manager.getLocal();

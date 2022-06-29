@@ -17,7 +17,7 @@ class ProductsManager extends ChangeNotifier {
   String _url = '';
   Map<String, dynamic> map = {};
   Map<String, dynamic> mapL = {};
-  DataHome? dataHome;
+  DataHome? searchData;
 
   void setMap() {
     map = {
@@ -42,6 +42,7 @@ class ProductsManager extends ChangeNotifier {
     var box = Boxes.getLikeBox();
     return box.get('$id') ?? false;
   }
+
   void setLike(int id, bool value)
   {
     var box = Boxes.getLikeBox();
@@ -142,11 +143,11 @@ class ProductsManager extends ChangeNotifier {
 
   void search(FormData formData, String value) async {
     if (value == '') {
-      dataHome = DataHome(products: []);
+      searchData = DataHome(products: []);
       notifyListeners();
     } else {
       DataService dataService = DataService(Dio());
-      dataHome = await dataService.search(formData);
+      searchData = await dataService.search(formData);
       notifyListeners();
     }
   }
@@ -191,12 +192,38 @@ class ProductsManager extends ChangeNotifier {
   }
 
 
-  Future <void> logOut(String token)
+  Future<void> logOut(String token)
   {
     DataService dataService = DataService(Dio());
     return dataService.logOut(token);
   }
 
+  Future<UserProducts> getUserProducts(int id)
+  {
+        //??UserSign(id: 1, email: '', name: '', phoneNumber: '', createdAt: '', updatedAt: '', facebook: '');
+    DataService dataService = DataService(Dio());
+    return dataService.getUserProducts(id);
+  }
+
+
+  Future <void> deleteAccount(String token, int id)
+  {
+    DataService dataService =  DataService(Dio());
+    return dataService.deleteAccount(id, token);
+  }
+
+
+  Future <void> deleteComment(int id, String token)
+  {
+    DataService dataService = DataService(Dio());
+    return dataService.deleteComment(id, token);
+  }
+
+  Future <void> updateComment(int id, String token, FormData formData)
+  {
+    DataService dataService = DataService(Dio());
+    return dataService.updateComment(id, token, formData);
+  }
 
 
   /////////...........
@@ -230,34 +257,10 @@ class ProductsManager extends ChangeNotifier {
     }
   }
 
-  Map<String, dynamic> mp = {};
-  setProfile(UserLogin login) {
-    mp.clear();
-    mp = {
-      'name': login.name,
-      'email': login.email,
-      'phone number': login.phoneNumber,
-      'facebook': login.facebook,
-      'id': login.id
-    };
-  }
+void setUser(UserSign userSign) async {
+    final box = Boxes.getUserBox();
+    await box.put('userData', userSign);
+    notifyListeners();
+}
 
-  Map<String, dynamic> getProfile() {
-    return mp;
-  }
-
-  setProfileS(SignupData signupData) {
-    mp.clear();
-    mp = {
-      'name': signupData.user.name,
-      'email': signupData.user.email,
-      'phone number': signupData.user.phoneNumber,
-      'facebook': signupData.user.facebook,
-      'id': signupData.user.id
-    };
-  }
-
-  Map<String, dynamic> getProfileS() {
-    return mp;
-  }
 }

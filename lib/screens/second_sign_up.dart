@@ -229,11 +229,7 @@ class _SecondSignUpScreenState extends State<SecondSignUpScreen> {
                           if (signupData.token != 'error') {
                             Provider.of<ProductsManager>(context, listen: false)
                                 .setToken(signupData.token);
-                            var box2 = Boxes.getLogBox();
-                            box2.clear();
-                            box2.put('isLogged', true);
-                            Provider.of<ProductsManager>(context, listen: false)
-                                .setProfileS(signupData);
+                            Provider.of<ProductsManager>(context,listen: false).setUser(signupData.user);
                             Navigator.pushReplacementNamed(context, '/home');
                           }
                         } catch (e) {

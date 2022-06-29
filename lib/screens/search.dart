@@ -44,7 +44,7 @@ class _SearchScreenState extends State<SearchScreen> {
     double width = size.width;
     double height = size.height;
     return Consumer<ProductsManager>(builder: (context, manager, child) {
-      DataHome dataHome = manager.dataHome ?? DataHome(products: []);
+      DataHome dataHome = manager.searchData ?? DataHome(products: []);
       bool isEng = manager.getLocal();
       return SafeArea(
         child: Directionality(

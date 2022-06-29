@@ -3,7 +3,7 @@ import '../models.dart';
 part 'login.g.dart';
 @JsonSerializable()
 class Login {
-  UserLogin user;
+  UserSign user;
   @JsonKey(defaultValue: '')
   String type;
   @JsonKey(defaultValue: 'error')

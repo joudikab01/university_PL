@@ -62,4 +62,18 @@ abstract class DataService {
   @POST('/auth/logout')
   Future <void> logOut(@Header('Authorization') String token);
 
+  @GET('/products/user_Products/{id}')
+  Future<UserProducts> getUserProducts(@Path("id") int id);
+
+  @DELETE('/auth/deleteUser/{id}')
+  Future<void> deleteAccount(
+      @Path("id") int id, @Header('Authorization') String token);
+
+  @DELETE('/comments/{id}')
+  Future<void> deleteComment(
+      @Path("id") int id, @Header('Authorization') String token);
+
+  @POST('/comments/{id}')
+  Future<void> updateComment(@Path("id") int id,
+      @Header('Authorization') String token, FormData formData);
 }

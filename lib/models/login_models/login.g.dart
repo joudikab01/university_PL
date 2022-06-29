@@ -9,7 +9,7 @@ part of 'login.dart';
 Login _$LoginFromJson(Map<String, dynamic> json) => Login(
       token: json['token'] as String? ?? 'error',
       type: json['type'] as String? ?? '',
-      user: UserLogin.fromJson(json['user'] as Map<String, dynamic>),
+      user: UserSign.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$LoginToJson(Login instance) => <String, dynamic>{

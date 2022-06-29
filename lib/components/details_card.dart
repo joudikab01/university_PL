@@ -4,7 +4,6 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
 import '../components/components.dart';
 import '../providers/providers.dart';
@@ -64,93 +63,48 @@ class _DetailsCardState extends State<DetailsCard> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  LikeButton(
-                    // onTap: (isTap) async{
-                    //   String token =
-                    //             Provider.of<ProductsManager>(context, listen: false)
-                    //                 .getToken();
-                    //         try {
-                    //           !_isFavorited
-                    //               ? Provider.of<ProductsManager>(context,
-                    //                       listen: false)
-                    //                   .addLike(
-                    //                       'Bearer $token',
-                    //                       FormData.fromMap(
-                    //                           {'product_id': widget.product.id}))
-                    //               : Provider.of<ProductsManager>(context,
-                    //                       listen: false)
-                    //                   .removeLike('Bearer $token',
-                    //                       widget.product.id);
-                    //           setState(() {
-                    //             _isFavorited = !_isFavorited;
-                    //             Provider.of<ProductsManager>(context, listen: false)
-                    //                 .setLike(widget.product.id, _isFavorited);
-                    //           });
-                    //           return isTap;
-                    //         } catch (e) {return !isTap;}
-                    //
-                    // },
-                    size: 30,
-                    circleColor:
-                    const CircleColor(start: Color(0xff00ddff), end: Color(0xff0099cc)),
-                    bubblesColor: const BubblesColor(
-                      dotPrimaryColor: Color(0xff33b5e5),
-                      dotSecondaryColor: Color(0xff0099cc),
+                  CircleAvatar(
+                    backgroundColor: Colors.grey[200],
+                    radius: 20,
+                    child: IconButton(
+                      onPressed: () {
+                        String token =
+                            Provider.of<ProductsManager>(context, listen: false)
+                                .getToken();
+                        try {
+                          !_isFavorited
+                              ? Provider.of<ProductsManager>(context,
+                                      listen: false)
+                                  .addLike(
+                                      'Bearer $token',
+                                      FormData.fromMap(
+                                          {'product_id': widget.product.id}))
+                              : Provider.of<ProductsManager>(context,
+                                      listen: false)
+                                  .removeLike('Bearer $token',
+                                      widget.product.id);
+                          setState(() {
+                            _isFavorited = !_isFavorited;
+                            Provider.of<ProductsManager>(context, listen: false)
+                                .setLike(widget.product.id, _isFavorited);
+                          });
+                          Provider.of<ProductsManager>(context).refresh();
+                        } catch (e) {}
+                      },
+                      icon: Icon(
+                        _isFavorited ? Icons.favorite : Icons.favorite_border,
+                        color: Colors.black,
+                      ),
                     ),
-                    likeBuilder: (bool isLiked) {
-                      return Icon(
-                        Icons.favorite,
-                        color: isLiked ? Colors.red : Colors.grey,
-                        size: 30,
-                      );
-                    },
-                    circleSize: 40,
-                    bubblesSize: 100,
-                    animationDuration: const Duration(microseconds: 1500),
-                    countPostion: CountPostion.bottom,
-                    likeCount: widget.product.likesCount,
                   ),
-                  // CircleAvatar(
-                  //   backgroundColor: Colors.grey[200],
-                  //   radius: 20,
-                  //   child: IconButton(
-                  //     onPressed: () {
-                  //       String token =
-                  //           Provider.of<ProductsManager>(context, listen: false)
-                  //               .getToken();
-                  //       try {
-                  //         !_isFavorited
-                  //             ? Provider.of<ProductsManager>(context,
-                  //                     listen: false)
-                  //                 .addLike(
-                  //                     'Bearer $token',
-                  //                     FormData.fromMap(
-                  //                         {'product_id': widget.product.id}))
-                  //             : Provider.of<ProductsManager>(context,
-                  //                     listen: false)
-                  //                 .removeLike('Bearer $token',
-                  //                     widget.product.id);
-                  //         setState(() {
-                  //           _isFavorited = !_isFavorited;
-                  //           Provider.of<ProductsManager>(context, listen: false)
-                  //               .setLike(widget.product.id, _isFavorited);
-                  //         });
-                  //       } catch (e) {}
-                  //     },
-                  //     icon: Icon(
-                  //       _isFavorited ? Icons.favorite : Icons.favorite_border,
-                  //       color: Colors.black,
-                  //     ),
-                  //   ),
-                  // ),
-                  // Text(
-                  //   widget.product.likesCount.toString(),
-                  //   style: const TextStyle(
-                  //     fontSize: 15,
-                  //     fontWeight: FontWeight.bold,
-                  //     color: Colors.black,
-                  //   ),
-                  // ),
+                  Text(
+                    widget.product.likesCount.toString(),
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
                   const SizedBox(
                     height: 15,
                   ),
@@ -178,10 +132,9 @@ class _DetailsCardState extends State<DetailsCard> {
                     radius: 20,
                     child: IconButton(
                       onPressed: () {
-                        var id =
-                            Provider.of<ProductsManager>(context, listen: false)
-                                .getProfile();
-                        int _id = id['id'];
+                        var box = Boxes.getUserBox();
+                        UserSign? userSign = box.get('userData');
+                        int _id = userSign!.id;
                         if (widget.product.user.id == _id) {
                           Navigator.push(
                             context,
@@ -312,7 +265,7 @@ class _DetailsCardState extends State<DetailsCard> {
                               children: [
                                 Text(
                                   'Expires at ${widget.product.expireDate}',
-                                  style: GoogleFonts.archivoBlack(
+                                  style: GoogleFonts.openSans(
                                     color: Colors.red,
                                     fontSize: 16,
                                     fontWeight: FontWeight.normal,
@@ -590,7 +543,7 @@ class _DetailsCardState extends State<DetailsCard> {
                                       size: 28,
                                     ),
                                     Text(
-                                      ' ${widget.product.user.facebookUrl} ',
+                                      ' ${widget.product.user.facebook} ',
                                       style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 24,
