@@ -102,8 +102,11 @@ Widget _buildSortedProducts(
       const SizedBox(
         height: 12,
       ),
-      SortedProductListView(
-        products: products,
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: SortedProductListView(
+          products: products,
+        ),
       ),
     ],
   );

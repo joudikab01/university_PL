@@ -6,6 +6,7 @@ import 'models/signup_models/user.dart';
 import 'providers/providers.dart';
 import 'screens/screens.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
 void main() async {
@@ -16,11 +17,20 @@ void main() async {
   await Hive.openBox<String>('auth');
   await Hive.openBox<bool>('isLiked');
   await Hive.openBox<UserSign>('user');
-  runApp(const MyApp());
+  runApp( const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+   const MyApp({Key? key}) : super(key: key);
+
+  // late GoogleMapController mapController;
+  //
+  // final LatLng _center = const LatLng(45.521563, -122.677433);
+  //
+  // void _onMapCreated(GoogleMapController controller) {
+  //   mapController = controller;
+  // }
+
   @override
   Widget build(BuildContext context) {
     var box = Boxes.getAuthBox();
@@ -42,6 +52,19 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        // home: Scaffold(
+        //   appBar: AppBar(
+        //     title: const Text('Maps Sample App'),
+        //     backgroundColor: Colors.green[700],
+        //   ),
+        //   body: GoogleMap(
+        //     onMapCreated: _onMapCreated,
+        //     initialCameraPosition: CameraPosition(
+        //       target: _center,
+        //       zoom: 11.0,
+        //     ),
+        //   ),
+        //),
         initialRoute: !isToken?'/splash_screen':'/home',
         routes: {
           '/log_in': (context) => const LoginScreen(),

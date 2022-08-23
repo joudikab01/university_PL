@@ -20,61 +20,63 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ProductsManager>(builder: (context, manager, child) {
       bool isEng = manager.getLocal();
-      return Scaffold(
-        body: IndexedStack(index: manager.selectedTab, children: pages),
-        bottomNavigationBar: CurvedNavigationBar(
-          // unselectedItemColor: Colors.blueGrey[200],
-          // unselectedLabelStyle: TextStyle(
-          //   color: Colors.blueGrey[200],
-          // ),
-          // selectedItemColor: Colors.white,
-          // selectedLabelStyle: const TextStyle(
-          //   color: Colors.white,
-          // ),
-          // showUnselectedLabels: true,
-          // currentIndex: manager.selectedTab,
-          onTap: (index) {
-            manager.goToTab(index);
-          },
-          index: manager.selectedTab,
-          backgroundColor: Colors.transparent,
-          color: Colors.blueGrey,
-          height: 60,
-          items: const [
-            Icon(Icons.settings,color: Colors.white,size: 30,),
-            Icon(Icons.person,color: Colors.white,size: 30,),
-            Icon(Icons.home,color: Colors.white,size: 30,),
-            Icon(Icons.category,color: Colors.white,size: 30,),
-            Icon(Icons.search,color: Colors.white,size: 30,),
-          ],
-          // items:  <BottomNavigationBarItem>[
-          //   BottomNavigationBarItem(
-          //     icon: const Icon(Icons.settings),
-          //     label: isEng?'Settings':'الاعدادات',
-          //     backgroundColor: Colors.blueGrey,
-          //   ),
-          //   BottomNavigationBarItem(
-          //       icon: const Icon(Icons.person),
-          //       backgroundColor: Colors.blueGrey,
-          //       label: isEng?'Profile':'حسابي'),
-          //   BottomNavigationBarItem(
-          //     icon: const Icon(Icons.home),
-          //     backgroundColor: Colors.blueGrey,
-          //     label: isEng?'Home':'الرئيسية',
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: const Icon(Icons.category),
-          //     label: isEng?'Categories':'الأصناف',
-          //     backgroundColor: Colors.blueGrey,
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: const Icon(
-          //       Icons.search,
-          //     ),
-          //     label: isEng?'Search':'بحث',
-          //     backgroundColor: Colors.blueGrey,
-          //   ),
-          // ],
+      return SafeArea(
+        child: Scaffold(
+          body: IndexedStack(index: manager.selectedTab, children: pages),
+          bottomNavigationBar: CurvedNavigationBar(
+            // unselectedItemColor: Colors.blueGrey[200],
+            // unselectedLabelStyle: TextStyle(
+            //   color: Colors.blueGrey[200],
+            // ),
+            // selectedItemColor: Colors.white,
+            // selectedLabelStyle: const TextStyle(
+            //   color: Colors.white,
+            // ),
+            // showUnselectedLabels: true,
+            // currentIndex: manager.selectedTab,
+            onTap: (index) {
+              manager.goToTab(index);
+            },
+            index: manager.selectedTab,
+            backgroundColor: Colors.transparent,
+            color: Colors.blueGrey,
+            height: 60,
+            items: const [
+              Icon(Icons.settings,color: Colors.white,size: 30,),
+              Icon(Icons.person,color: Colors.white,size: 30,),
+              Icon(Icons.home,color: Colors.white,size: 30,),
+              Icon(Icons.category,color: Colors.white,size: 30,),
+              Icon(Icons.search,color: Colors.white,size: 30,),
+            ],
+            // items:  <BottomNavigationBarItem>[
+            //   BottomNavigationBarItem(
+            //     icon: const Icon(Icons.settings),
+            //     label: isEng?'Settings':'الاعدادات',
+            //     backgroundColor: Colors.blueGrey,
+            //   ),
+            //   BottomNavigationBarItem(
+            //       icon: const Icon(Icons.person),
+            //       backgroundColor: Colors.blueGrey,
+            //       label: isEng?'Profile':'حسابي'),
+            //   BottomNavigationBarItem(
+            //     icon: const Icon(Icons.home),
+            //     backgroundColor: Colors.blueGrey,
+            //     label: isEng?'Home':'الرئيسية',
+            //   ),
+            //   BottomNavigationBarItem(
+            //     icon: const Icon(Icons.category),
+            //     label: isEng?'Categories':'الأصناف',
+            //     backgroundColor: Colors.blueGrey,
+            //   ),
+            //   BottomNavigationBarItem(
+            //     icon: const Icon(
+            //       Icons.search,
+            //     ),
+            //     label: isEng?'Search':'بحث',
+            //     backgroundColor: Colors.blueGrey,
+            //   ),
+            // ],
+          ),
         ),
       );
     });

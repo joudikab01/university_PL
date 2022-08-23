@@ -21,6 +21,7 @@ class SortedProductListView extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 10,
           mainAxisSpacing: 5,
+          childAspectRatio: 2/2.75,
         ),
         itemBuilder: (context, index) {
           return GestureDetector(

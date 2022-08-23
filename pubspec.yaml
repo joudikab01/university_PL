@@ -52,6 +52,12 @@ dependencies:
   animated_flip_counter: ^0.2.1
   curved_navigation_bar: ^1.0.1
   cached_network_image: ^3.2.0
+  google_maps_flutter: ^2.1.12
+  firebase_core: ^1.0.1
+  firebase_auth: ^1.0.1
+  google_sign_in: ^5.0.0
+
+
 
 dev_dependencies:
   flutter_test:

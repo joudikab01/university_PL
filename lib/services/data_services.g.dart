@@ -6,9 +6,11 @@ part of 'data_services.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
+
 class _DataService implements DataService {
   _DataService(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'http://10.0.2.2:8000/api';
+    baseUrl ??= 'http://127.0.0.1:8000/api';
   }
 
   final Dio _dio;
