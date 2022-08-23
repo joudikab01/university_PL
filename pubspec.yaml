@@ -36,7 +36,6 @@ dependencies:
   provider:
   shared_preferences:
   flutter_svg:
-  font_awesome_flutter:
   google_fonts: ^2.1.0
   ionicons:
   animated_button:
@@ -56,6 +55,7 @@ dependencies:
   firebase_core: ^1.0.1
   firebase_auth: ^1.0.1
   google_sign_in: ^5.0.0
+  font_awesome_flutter: ^10.1.0
 
 
 
