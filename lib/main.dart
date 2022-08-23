@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../screens/sorted_product.dart';
@@ -8,7 +10,6 @@ import 'screens/screens.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
@@ -17,11 +18,12 @@ void main() async {
   await Hive.openBox<String>('auth');
   await Hive.openBox<bool>('isLiked');
   await Hive.openBox<UserSign>('user');
-  runApp( const MyApp());
+  await Firebase.initializeApp();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-   const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   // late GoogleMapController mapController;
   //
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
     var box = Boxes.getAuthBox();
     String? token = box.get('token');
     bool isToken;
-    if(token != 'error' && token!='' && token!=null)
+    if (token != 'error' && token != '' && token != null)
       isToken = true;
     else
       isToken = false;
@@ -48,6 +50,10 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => CacheManager(),
+        ),
+        StreamProvider.value(
+          value: FirebaseAuth.instance.authStateChanges(),
+          initialData: 0,
         )
       ],
       child: MaterialApp(
@@ -65,7 +71,8 @@ class MyApp extends StatelessWidget {
         //     ),
         //   ),
         //),
-        initialRoute: !isToken?'/splash_screen':'/home',
+        home: LoginScreen(),
+        //initialRoute: !isToken ? '/splash_screen' : '/home',
         routes: {
           '/log_in': (context) => const LoginScreen(),
           '/home': (context) => const Home(),
@@ -81,5 +88,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-
 }
