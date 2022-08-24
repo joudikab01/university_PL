@@ -25,7 +25,8 @@ class FirebaseService {
       );
       await _auth.signInWithCredential(credential);
 
-        log(await _auth.currentUser?.getIdToken() ?? '');
+        log('token is ${await _auth.currentUser?.getIdToken()}');
+        log( 'access is ${googleSignInAuthentication.accessToken}');
 
     } on FirebaseAuthException catch (e) {
       print(e.message);
