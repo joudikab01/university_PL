@@ -31,7 +31,7 @@ class SortedProductListView extends StatelessWidget {
             onTap: () async {
               Provider.of<ProductsManager>(context, listen: false)
                   .selectProduct(index);
-              ProductDetails product = await Provider.of<ProductsManager>(context,listen: false).getProductDetails(products[index].id);
+              ProductDetails product = await Provider.of<ProductsManager>(context,listen: false).getProductDetails2(products[index].id);
               Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(product: product)));
             },
           );

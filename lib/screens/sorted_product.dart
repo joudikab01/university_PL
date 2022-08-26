@@ -16,7 +16,7 @@ class _SortedProductState extends State<SortedProduct> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future:  Provider.of<ProductsManager>(context, listen: false).getAllCategories(),
+        future:  Provider.of<ProductsManager>(context, listen: false).getAllCategories2(),
         builder: (BuildContext context, AsyncSnapshot<DataCategories> snapshot) {
           return Consumer<ProductsManager>(
             builder: (context, manager, child) {

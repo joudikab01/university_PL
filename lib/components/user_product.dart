@@ -15,7 +15,7 @@ class UserProduct extends StatelessWidget {
       onTap: () async{
         ProductDetails _product =
             await Provider.of<ProductsManager>(context, listen: false)
-            .getProductDetails(product.id);
+            .getProductDetails2(product.id);
         Navigator.push(
             context,
             MaterialPageRoute(

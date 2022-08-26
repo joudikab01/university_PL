@@ -19,7 +19,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     return Consumer<ProductsManager>(builder: (context, manager, child) {
       return FutureBuilder(
           future: Provider.of<ProductsManager>(context, listen: false)
-              .getAllCategories(),
+              .getAllCategories2(),
           builder:
               (BuildContext context, AsyncSnapshot<DataCategories> snapshot) {
             DataCategories? dataCategories = snapshot.data ??

@@ -39,7 +39,7 @@ class ProductListView extends StatelessWidget {
                 .selectProduct(index);
             ProductDetails product =
                 await Provider.of<ProductsManager>(context, listen: false)
-                    .getProductDetails(products[index].id);
+                    .getProductDetails2(products[index].id);
             Navigator.push(
                 context,
                 MaterialPageRoute(

@@ -35,7 +35,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
       return FutureBuilder(
           future: sort.contains(true)
               ? manager.sort(FormData.fromMap(map))
-              : manager.getAllData(),
+              : manager.getAllData2(),
           builder: (BuildContext context, AsyncSnapshot<DataHome> snapshot) {
             DataHome data = snapshot.data ??
                 DataHome(products: [

@@ -231,7 +231,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Login login =
                                     await Provider.of<ProductsManager>(context,
                                             listen: false)
-                                        .logIn();
+                                        .logIn2();
                                 if (login.token != 'error') {
                                   Provider.of<ProductsManager>(context,
                                           listen: false)

@@ -225,7 +225,7 @@ class _SecondSignUpScreenState extends State<SecondSignUpScreen> {
                           SignupData signupData =
                               await Provider.of<ProductsManager>(context,
                                       listen: false)
-                                  .signUp();
+                                  .signUp2();
                           if (signupData.token != 'error') {
                             Provider.of<ProductsManager>(context, listen: false)
                                 .setToken(signupData.token);
