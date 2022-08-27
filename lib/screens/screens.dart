@@ -10,3 +10,4 @@ export 'profile.dart';
 export 'home.dart';
 export 'add_product.dart';
 export 'categories.dart';
+export 'updated_profile.dart';

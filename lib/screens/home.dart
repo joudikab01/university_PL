@@ -10,7 +10,7 @@ class Home extends StatelessWidget {
 
   static List<Widget> pages = <Widget>[
     const Settings(),
-    const Profile(),
+    const UpdatedProfile(),
     const ProductsScreen(),
     const CategoriesScreen(),
     const SearchScreen(),

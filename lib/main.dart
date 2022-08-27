@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
         //     ),
         //   ),
         //),
-        home: LoginScreen(),
+        home: Home(),
         //initialRoute: !isToken ? '/splash_screen' : '/home',
         routes: {
           '/log_in': (context) => const LoginScreen(),
