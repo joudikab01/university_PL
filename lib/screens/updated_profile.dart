@@ -1,10 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import '../providers/providers.dart';
-import '../models/models.dart';
-import '../components/components.dart';
 import '../responsive.dart';
 
 class UpdatedProfile extends StatefulWidget {
@@ -16,16 +10,17 @@ class UpdatedProfile extends StatefulWidget {
 
 class _UpdatedProfileState extends State<UpdatedProfile> {
   static List<Widget> pages = <Widget>[
-    Orders(),
-    Favorites(),
-    Info(),
-    Notifications(),
+    const Orders(),
+    const Favorites(),
+    const Info(),
+    const Notifications(),
   ];
 
   int stackIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(245, 245, 245, 1),
       body: Column(
         children: [
           Stack(
@@ -36,8 +31,8 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
               Container(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height / 4,
-                decoration: BoxDecoration(
-                  color: Colors.green,
+                decoration: const BoxDecoration(
+                  color: Colors.blueGrey,
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(
                       35,
@@ -46,6 +41,54 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
                       35,
                     ),
                   ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: Icon(
+                        Icons.supervised_user_circle_outlined,
+                        size: 50,
+                        color: Colors.blueGrey,
+                      ),
+                      radius: 40,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Profile',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 6,
+                        ),
+                        Text(
+                          'joudi.kab01@gmail.com',
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                          ),
+                        )
+                      ],
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 60),
+                      child: Icon(
+                        Icons.settings,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    )
+                  ],
                 ),
               ),
               Positioned(
@@ -59,19 +102,25 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
                         setState(() {
                           stackIndex = 0;
                         });
-                        print(stackIndex);
                       },
                       child: Container(
-                        width: responsiveSize.getWidth(50, context),
-                        height: responsiveSize.getHeight(50, context),
+                        width: responsiveSize.getWidth(60, context),
+                        height: responsiveSize.getHeight(60, context),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                             10,
                           ),
-                          color: Colors.white70,
+                          color: Colors.white,
                           shape: BoxShape.rectangle,
+                          boxShadow: const [
+                            BoxShadow(
+                                color: Colors.black12,
+                                offset: Offset(2, 5),
+                                blurRadius: 10,
+                                blurStyle: BlurStyle.inner),
+                          ],
                         ),
-                        child: Icon(Icons.local_activity_sharp),
+                        child: const Icon(Icons.favorite_border),
                       ),
                     ),
                     GestureDetector(
@@ -79,19 +128,27 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
                         setState(() {
                           stackIndex = 1;
                         });
-                        print(stackIndex);
                       },
                       child: Container(
-                        width: responsiveSize.getWidth(50, context),
-                        height: responsiveSize.getHeight(50, context),
+                        width: responsiveSize.getWidth(60, context),
+                        height: responsiveSize.getHeight(60, context),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                             10,
                           ),
-                          color: Colors.white70,
+                          color: Colors.white,
                           shape: BoxShape.rectangle,
+                          boxShadow: const [
+                            BoxShadow(
+                                color: Colors.black12,
+                                offset: Offset(2, 5),
+                                blurRadius: 10,
+                                blurStyle: BlurStyle.inner),
+                          ],
                         ),
-                        child: Icon(Icons.local_activity_sharp),
+                        child: const Icon(
+                          Icons.notifications_none_rounded,
+                        ),
                       ),
                     ),
                     GestureDetector(
@@ -99,19 +156,27 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
                         setState(() {
                           stackIndex = 2;
                         });
-                        print(stackIndex);
                       },
                       child: Container(
-                        width: responsiveSize.getWidth(50, context),
-                        height: responsiveSize.getHeight(50, context),
+                        width: responsiveSize.getWidth(60, context),
+                        height: responsiveSize.getHeight(60, context),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                             10,
                           ),
-                          color: Colors.white70,
+                          color: Colors.white,
                           shape: BoxShape.rectangle,
+                          boxShadow: const [
+                            BoxShadow(
+                                color: Colors.black12,
+                                offset: Offset(2, 5),
+                                blurRadius: 10,
+                                blurStyle: BlurStyle.inner),
+                          ],
                         ),
-                        child: Icon(Icons.local_activity_sharp),
+                        child: const Icon(
+                          Icons.account_circle_outlined,
+                        ),
                       ),
                     ),
                     GestureDetector(
@@ -121,16 +186,25 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
                         });
                       },
                       child: Container(
-                        width: responsiveSize.getWidth(50, context),
-                        height: responsiveSize.getHeight(50, context),
+                        width: responsiveSize.getWidth(60, context),
+                        height: responsiveSize.getHeight(60, context),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                             10,
                           ),
-                          color: Colors.white70,
+                          color: Colors.white,
                           shape: BoxShape.rectangle,
+                          boxShadow: const [
+                            BoxShadow(
+                                color: Colors.black12,
+                                offset: Offset(2, 5),
+                                blurRadius: 10,
+                                blurStyle: BlurStyle.inner),
+                          ],
                         ),
-                        child: Icon(Icons.local_activity_sharp),
+                        child: const Icon(
+                          Icons.shopping_cart_outlined,
+                        ),
                       ),
                     ),
                   ],
