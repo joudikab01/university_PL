@@ -15,6 +15,7 @@ class UpdatedProfile extends StatefulWidget {
 }
 
 class _UpdatedProfileState extends State<UpdatedProfile> {
+  int stackIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,53 +47,169 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      width: responsiveSize.getWidth(50, context),
-                      height: responsiveSize.getHeight(50, context),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10,),
-                        color: Colors.white70,
-                        shape: BoxShape.rectangle,
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+
+                          stackIndex = 0;
+                        });
+                        print(stackIndex);
+                      },
+                      child: Container(
+                        width: responsiveSize.getWidth(50, context),
+                        height: responsiveSize.getHeight(50, context),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            10,
+                          ),
+                          color: Colors.white70,
+                          shape: BoxShape.rectangle,
+                        ),
+                        child: Icon(Icons.local_activity_sharp),
                       ),
-                      child: Icon(Icons.local_activity_sharp),
                     ),
-                    Container(
-                      width: responsiveSize.getWidth(50, context),
-                      height: responsiveSize.getHeight(50, context),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10,),
-                        color: Colors.white70,
-                        shape: BoxShape.rectangle,
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+
+                          stackIndex = 1;
+                        });
+                        print(stackIndex);
+                      },
+                      child: Container(
+                        width: responsiveSize.getWidth(50, context),
+                        height: responsiveSize.getHeight(50, context),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            10,
+                          ),
+                          color: Colors.white70,
+                          shape: BoxShape.rectangle,
+                        ),
+                        child: Icon(Icons.local_activity_sharp),
                       ),
-                      child: Icon(Icons.local_activity_sharp),
                     ),
-                    Container(
-                      width: responsiveSize.getWidth(50, context),
-                      height: responsiveSize.getHeight(50, context),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10,),
-                        color: Colors.white70,
-                        shape: BoxShape.rectangle,
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+
+                          stackIndex = 2;
+                        });
+                        print(stackIndex);
+                      },
+                      child: Container(
+                        width: responsiveSize.getWidth(50, context),
+                        height: responsiveSize.getHeight(50, context),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            10,
+                          ),
+                          color: Colors.white70,
+                          shape: BoxShape.rectangle,
+                        ),
+                        child: Icon(Icons.local_activity_sharp),
                       ),
-                      child: Icon(Icons.local_activity_sharp),
                     ),
-                    Container(
-                      width: responsiveSize.getWidth(50, context),
-                      height: responsiveSize.getHeight(50, context),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10,),
-                        color: Colors.white70,
-                        shape: BoxShape.rectangle,
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          stackIndex = 3;
+                        });
+                      },
+                      child: Container(
+                        width: responsiveSize.getWidth(50, context),
+                        height: responsiveSize.getHeight(50, context),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            10,
+                          ),
+                          color: Colors.white70,
+                          shape: BoxShape.rectangle,
+                        ),
+                        child: Icon(Icons.local_activity_sharp),
                       ),
-                      child: Icon(Icons.local_activity_sharp),
                     ),
                   ],
                 ),
               ),
             ],
           ),
+          Container(
+            color: Colors.yellowAccent,
+            width: double.infinity,
+            height: 300,
+            child: IndexedStack(
+              index: stackIndex,
+              children: [
+                Orders(),
+                Favorites(),
+                Info(),
+                Notifications(),
+              ],
+            ),
+          ),
         ],
       ),
     );
+  }
+}
+
+class Orders extends StatelessWidget {
+  const Orders({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return Container(
+            color: Colors.green,
+          );
+        });
+  }
+}
+
+class Favorites extends StatelessWidget {
+  const Favorites({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return Container(
+            color: Colors.red,
+          );
+        });
+  }
+}
+
+class Info extends StatelessWidget {
+  const Info({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return Container(
+            color: Colors.pink,
+          );
+        });
+  }
+}
+
+class Notifications extends StatelessWidget {
+  const Notifications({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return Container(
+            color: Colors.purple,
+          );
+        });
   }
 }
