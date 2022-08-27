@@ -42,11 +42,31 @@ class Home extends StatelessWidget {
             color: Colors.blueGrey,
             height: 60,
             items: const [
-              Icon(Icons.settings,color: Colors.white,size: 30,),
-              Icon(Icons.person,color: Colors.white,size: 30,),
-              Icon(Icons.home,color: Colors.white,size: 30,),
-              Icon(Icons.category,color: Colors.white,size: 30,),
-              Icon(Icons.search,color: Colors.white,size: 30,),
+              Icon(
+                Icons.settings,
+                color: Colors.white,
+                size: 30,
+              ),
+              Icon(
+                Icons.person,
+                color: Colors.white,
+                size: 30,
+              ),
+              Icon(
+                Icons.home,
+                color: Colors.white,
+                size: 30,
+              ),
+              Icon(
+                Icons.category,
+                color: Colors.white,
+                size: 30,
+              ),
+              Icon(
+                Icons.search,
+                color: Colors.white,
+                size: 30,
+              ),
             ],
             // items:  <BottomNavigationBarItem>[
             //   BottomNavigationBarItem(

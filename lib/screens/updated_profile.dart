@@ -15,6 +15,13 @@ class UpdatedProfile extends StatefulWidget {
 }
 
 class _UpdatedProfileState extends State<UpdatedProfile> {
+  static List<Widget> pages = <Widget>[
+    Orders(),
+    Favorites(),
+    Info(),
+    Notifications(),
+  ];
+
   int stackIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -48,9 +55,8 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         setState(() {
-
                           stackIndex = 0;
                         });
                         print(stackIndex);
@@ -69,9 +75,8 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         setState(() {
-
                           stackIndex = 1;
                         });
                         print(stackIndex);
@@ -90,9 +95,8 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         setState(() {
-
                           stackIndex = 2;
                         });
                         print(stackIndex);
@@ -111,7 +115,7 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         setState(() {
                           stackIndex = 3;
                         });
@@ -140,12 +144,7 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
             height: 300,
             child: IndexedStack(
               index: stackIndex,
-              children: [
-                Orders(),
-                Favorites(),
-                Info(),
-                Notifications(),
-              ],
+              children: pages,
             ),
           ),
         ],
@@ -154,9 +153,14 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
   }
 }
 
-class Orders extends StatelessWidget {
+class Orders extends StatefulWidget {
   const Orders({Key? key}) : super(key: key);
 
+  @override
+  State<Orders> createState() => _OrdersState();
+}
+
+class _OrdersState extends State<Orders> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -169,9 +173,14 @@ class Orders extends StatelessWidget {
   }
 }
 
-class Favorites extends StatelessWidget {
+class Favorites extends StatefulWidget {
   const Favorites({Key? key}) : super(key: key);
 
+  @override
+  State<Favorites> createState() => _FavoritesState();
+}
+
+class _FavoritesState extends State<Favorites> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -184,9 +193,14 @@ class Favorites extends StatelessWidget {
   }
 }
 
-class Info extends StatelessWidget {
+class Info extends StatefulWidget {
   const Info({Key? key}) : super(key: key);
 
+  @override
+  State<Info> createState() => _InfoState();
+}
+
+class _InfoState extends State<Info> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -199,9 +213,14 @@ class Info extends StatelessWidget {
   }
 }
 
-class Notifications extends StatelessWidget {
+class Notifications extends StatefulWidget {
   const Notifications({Key? key}) : super(key: key);
 
+  @override
+  State<Notifications> createState() => _NotificationsState();
+}
+
+class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
