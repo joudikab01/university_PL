@@ -46,95 +46,93 @@ class _SearchScreenState extends State<SearchScreen> {
     return Consumer<ProductsManager>(builder: (context, manager, child) {
       DataHome dataHome = manager.searchData ?? DataHome(products: []);
       bool isEng = manager.getLocal();
-      return SafeArea(
-        child: Directionality(
-          textDirection: isEng?ui.TextDirection.ltr: ui.TextDirection.rtl,
-          child: Scaffold(
-            appBar: AppBar(
-              elevation: 0,
-              backgroundColor: Colors.blueGrey,
-              title: Text(
-                isEng ? 'Search By' : 'بحث عبر',
-                style: isEng ? GoogleFonts.openSans() : GoogleFonts.tajawal(),
-              ),
-              centerTitle: true,
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: DropdownButton<String>(
-                    dropdownColor: Colors.blueGrey,
-                    icon: const FaIcon(
-                      FontAwesomeIcons.angleDown,
-                      color: Colors.white,
-                    ),
-                    elevation: 0,
-                    borderRadius:
-                        const BorderRadius.only(bottomLeft: Radius.circular(16)),
-                    value: isEng? dropDownValue: dropDownValueAr,
-                    items: isEng?<String>['Name', 'From Date', 'To Date']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      );
-                    }).toList():<String>['الاسم', 'من تاريخ', 'الا تاريخ']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (String? value) {
-                      setState(
-                        () {
-                          if (value == 'Name' || value == 'الاسم') {
-                            searchByName = true;
-                            searchFromDate = false;
-                            dropDownValue = 'Name';
-                            dropDownValueAr = 'الاسم';
-                          } else if (value == 'From Date' || value =='من تاريخ') {
-                            searchByName = false;
-                            searchFromDate = true;
-                            dropDownValue = 'From Date';
-                            dropDownValueAr = 'من تاريخ';
-                          } else {
-                            searchByName = false;
-                            searchFromDate = false;
-                            dropDownValueAr = 'الا تاريخ';
-                            dropDownValue = 'To Date';
-                          }
-                        },
-                      );
-                    },
+      return Directionality(
+        textDirection: isEng?ui.TextDirection.ltr: ui.TextDirection.rtl,
+        child: Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.blueGrey,
+            title: Text(
+              isEng ? 'Search By' : 'بحث عبر',
+              style: isEng ? GoogleFonts.openSans() : GoogleFonts.tajawal(),
+            ),
+            centerTitle: true,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: DropdownButton<String>(
+                  dropdownColor: Colors.blueGrey,
+                  icon: const FaIcon(
+                    FontAwesomeIcons.angleDown,
+                    color: Colors.white,
                   ),
-                ),
-              ],
-            ),
-            body: ListView(
-              //primary: false,
-              //shrinkWrap: true,
-              children: [
-                _buildSearchCard(isEng, searchByName, searchFromDate),
-                dataHome.products.isNotEmpty
-                    ? ProductListView(
-                        products: dataHome.products,
-                        isSearch: true,
-                      )
-                    : Center(
-                        child: Image.asset(
-                          'assets/search.png',
-                          height: height / 2,
-                          width: width,
-                        ),
+                  elevation: 0,
+                  borderRadius:
+                      const BorderRadius.only(bottomLeft: Radius.circular(16)),
+                  value: isEng? dropDownValue: dropDownValueAr,
+                  items: isEng?<String>['Name', 'From Date', 'To Date']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: const TextStyle(color: Colors.white),
                       ),
-              ],
-            ),
+                    );
+                  }).toList():<String>['الاسم', 'من تاريخ', 'الا تاريخ']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (String? value) {
+                    setState(
+                      () {
+                        if (value == 'Name' || value == 'الاسم') {
+                          searchByName = true;
+                          searchFromDate = false;
+                          dropDownValue = 'Name';
+                          dropDownValueAr = 'الاسم';
+                        } else if (value == 'From Date' || value =='من تاريخ') {
+                          searchByName = false;
+                          searchFromDate = true;
+                          dropDownValue = 'From Date';
+                          dropDownValueAr = 'من تاريخ';
+                        } else {
+                          searchByName = false;
+                          searchFromDate = false;
+                          dropDownValueAr = 'الا تاريخ';
+                          dropDownValue = 'To Date';
+                        }
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          body: ListView(
+            //primary: false,
+            //shrinkWrap: true,
+            children: [
+              _buildSearchCard(isEng, searchByName, searchFromDate),
+              dataHome.products.isNotEmpty
+                  ? ProductListView(
+                      products: dataHome.products,
+                      isSearch: true,
+                    )
+                  : Center(
+                      child: Image.asset(
+                        'assets/search.png',
+                        height: height / 2,
+                        width: width,
+                      ),
+                    ),
+            ],
           ),
         ),
       );

@@ -213,7 +213,6 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
             ],
           ),
           Container(
-            color: Colors.yellowAccent,
             width: double.infinity,
             height: 300,
             child: IndexedStack(
@@ -237,13 +236,11 @@ class Orders extends StatefulWidget {
 class _OrdersState extends State<Orders> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return Container(
+    return
+           Container(
             color: Colors.green,
           );
-        });
+
   }
 }
 
@@ -257,13 +254,10 @@ class Favorites extends StatefulWidget {
 class _FavoritesState extends State<Favorites> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return Container(
+    return Container(
             color: Colors.red,
           );
-        });
+
   }
 }
 
@@ -277,13 +271,11 @@ class Info extends StatefulWidget {
 class _InfoState extends State<Info> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
+
           return Container(
             color: Colors.pink,
           );
-        });
+
   }
 }
 
@@ -297,12 +289,10 @@ class Notifications extends StatefulWidget {
 class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
+
           return Container(
             color: Colors.purple,
           );
-        });
+
   }
 }

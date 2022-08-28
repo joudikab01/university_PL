@@ -79,142 +79,140 @@ class _SettingsState extends State<Settings> {
     //var q = min(height, width);
     return Consumer<ProductsManager>(builder: (context, manager, child) {
       bool isEng = manager.getLocal();
-      return SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: Colors.blueGrey,
-            title: Text(
-              isEng ? 'Settings' : 'الإعدادات',
-            ),
-            centerTitle: true,
+      return Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.blueGrey,
+          title: Text(
+            isEng ? 'Settings' : 'الإعدادات',
           ),
-          body: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: Svg('assets/settings.svg'),
-              ),
+          centerTitle: true,
+        ),
+        body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: Svg('assets/settings.svg'),
             ),
-            child: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Directionality(
-                      textDirection:
-                          isEng ? TextDirection.ltr : TextDirection.rtl,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            isEng ? 'App language' : 'لغة التطبيق',
-                            style: const TextStyle(
-                                color: Colors.black87, fontSize: 25),
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          DropdownButton<String>(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(16)),
-                            value: isEng ? dropDownValueE : dropDownValueA,
-                            icon: const FaIcon(FontAwesomeIcons.angleDown),
-                            onChanged: (String? value) {
-                              setState(() {
-                                if (value == 'EN' || value == 'الإنكليزية') {
-                                  dropDownValueA = 'الإنكليزية';
-                                  dropDownValueE = 'EN';
-                                  isEng = true;
-                                } else if (value == 'AR' ||
-                                    value == 'الإنكليزية') {
-                                  dropDownValueA = 'العربية';
-                                  dropDownValueE = 'AR';
-                                  isEng = false;
-                                }
-                              });
-                              Provider.of<ProductsManager>(context,
-                                      listen: false)
-                                  .changeLocal(value!);
-                            },
-                            iconSize: 30,
-                            style: const TextStyle(
-                                color: Colors.black87, fontSize: 25),
-                            elevation: 2,
-                            items: isEng
-                                ? <String>['EN', 'AR']
-                                    .map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList()
-                                : <String>['الإنكليزية', 'العربية']
-                                    .map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
-                          ),
-                        ],
-                      ),
+          ),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Directionality(
+                    textDirection:
+                        isEng ? TextDirection.ltr : TextDirection.rtl,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          isEng ? 'App language' : 'لغة التطبيق',
+                          style: const TextStyle(
+                              color: Colors.black87, fontSize: 25),
+                        ),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        DropdownButton<String>(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16)),
+                          value: isEng ? dropDownValueE : dropDownValueA,
+                          icon: const FaIcon(FontAwesomeIcons.angleDown),
+                          onChanged: (String? value) {
+                            setState(() {
+                              if (value == 'EN' || value == 'الإنكليزية') {
+                                dropDownValueA = 'الإنكليزية';
+                                dropDownValueE = 'EN';
+                                isEng = true;
+                              } else if (value == 'AR' ||
+                                  value == 'الإنكليزية') {
+                                dropDownValueA = 'العربية';
+                                dropDownValueE = 'AR';
+                                isEng = false;
+                              }
+                            });
+                            Provider.of<ProductsManager>(context,
+                                    listen: false)
+                                .changeLocal(value!);
+                          },
+                          iconSize: 30,
+                          style: const TextStyle(
+                              color: Colors.black87, fontSize: 25),
+                          elevation: 2,
+                          items: isEng
+                              ? <String>['EN', 'AR']
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList()
+                              : <String>['الإنكليزية', 'العربية']
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                        ),
+                      ],
                     ),
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(top: 20),
-                  //   child: Container(
-                  //     width: width / 2.5,
-                  //     height: height / 8,
-                  //     decoration: BoxDecoration(
-                  //       shape: BoxShape.rectangle,
-                  //       borderRadius: BorderRadius.circular(20),
-                  //     ),
-                  //     child: Center(
-                  //       child: DropdownButton<String>(
-                  //         borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  //         value: dropDownValue,
-                  //         icon: const FaIcon(FontAwesomeIcons.angleDown),
-                  //         onChanged: (String? value) {
-                  //           setState(() {
-                  //             dropDownValue = value!;
-                  //           });
-                  //         },
-                  //         iconSize: 30,
-                  //         style: const TextStyle(
-                  //             color: Colors.black87, fontSize: 25),
-                  //         elevation: 2,
-                  //         items: <String>['EN', 'AR']
-                  //             .map<DropdownMenuItem<String>>((String value) {
-                  //           return DropdownMenuItem<String>(
-                  //             value: value,
-                  //             child: Text(value),
-                  //           );
-                  //         }).toList(),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  const Expanded(
-                    child: SizedBox(),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      showAlertDialog(context, isEng);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 30),
-                      child: Text(
-                        isEng ? 'Change Account' : 'تغيير الحساب',
-                        style: TextStyle(
-                            fontSize: 20, color: Colors.blueGrey[300]),
-                      ),
+                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 20),
+                //   child: Container(
+                //     width: width / 2.5,
+                //     height: height / 8,
+                //     decoration: BoxDecoration(
+                //       shape: BoxShape.rectangle,
+                //       borderRadius: BorderRadius.circular(20),
+                //     ),
+                //     child: Center(
+                //       child: DropdownButton<String>(
+                //         borderRadius: const BorderRadius.all(Radius.circular(16)),
+                //         value: dropDownValue,
+                //         icon: const FaIcon(FontAwesomeIcons.angleDown),
+                //         onChanged: (String? value) {
+                //           setState(() {
+                //             dropDownValue = value!;
+                //           });
+                //         },
+                //         iconSize: 30,
+                //         style: const TextStyle(
+                //             color: Colors.black87, fontSize: 25),
+                //         elevation: 2,
+                //         items: <String>['EN', 'AR']
+                //             .map<DropdownMenuItem<String>>((String value) {
+                //           return DropdownMenuItem<String>(
+                //             value: value,
+                //             child: Text(value),
+                //           );
+                //         }).toList(),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                const Expanded(
+                  child: SizedBox(),
+                ),
+                TextButton(
+                  onPressed: () {
+                    showAlertDialog(context, isEng);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 30),
+                    child: Text(
+                      isEng ? 'Change Account' : 'تغيير الحساب',
+                      style: TextStyle(
+                          fontSize: 20, color: Colors.blueGrey[300]),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
