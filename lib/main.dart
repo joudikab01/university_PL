@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../screens/sorted_product.dart';
@@ -18,7 +19,22 @@ void main() async {
   await Hive.openBox<String>('auth');
   await Hive.openBox<bool>('isLiked');
   await Hive.openBox<UserSign>('user');
-  await Firebase.initializeApp();
+  const firebaseConfig = FirebaseOptions(
+      apiKey: "AIzaSyDYiyf1nxtJiS_OMgmajJQtaMk5y_b2WSg",
+      authDomain: "e-commerce-8c4be.firebaseapp.com",
+      projectId: "e-commerce-8c4be",
+      storageBucket: "e-commerce-8c4be.appspot.com",
+      messagingSenderId: "997454701642",
+      appId: "1:997454701642:web:6f440d9bb2965affd9b2b3",
+      measurementId: "G-0MBJBW5FSH");
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options: firebaseConfig,
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
+
   runApp(const MyApp());
 }
 

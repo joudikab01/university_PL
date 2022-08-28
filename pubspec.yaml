@@ -36,7 +36,7 @@ dependencies:
   provider:
   shared_preferences:
   flutter_svg:
-  google_fonts: ^2.1.0
+  google_fonts: ^3.0.1
   ionicons:
   animated_button:
   flutter_svg_provider:
@@ -52,8 +52,8 @@ dependencies:
   curved_navigation_bar: ^1.0.1
   cached_network_image: ^3.2.0
   google_maps_flutter: ^2.1.12
-  firebase_core: ^1.0.1
-  firebase_auth: ^1.0.1
+  firebase_core: ^1.21.1
+  firebase_auth: ^3.7.0
   google_sign_in: ^5.0.0
   font_awesome_flutter: ^10.1.0
   connectivity_plus: ^2.3.5
@@ -73,7 +73,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

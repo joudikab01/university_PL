@@ -105,7 +105,7 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
                       },
                       child: Container(
                         width: responsiveSize.getWidth(60, context),
-                        height: responsiveSize.getHeight(60, context),
+                        height: responsiveSize.getWidth(60, context),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                             10,
@@ -131,7 +131,7 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
                       },
                       child: Container(
                         width: responsiveSize.getWidth(60, context),
-                        height: responsiveSize.getHeight(60, context),
+                        height: responsiveSize.getWidth(60, context),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                             10,
@@ -159,7 +159,7 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
                       },
                       child: Container(
                         width: responsiveSize.getWidth(60, context),
-                        height: responsiveSize.getHeight(60, context),
+                        height: responsiveSize.getWidth(60, context),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                             10,
@@ -187,7 +187,7 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
                       },
                       child: Container(
                         width: responsiveSize.getWidth(60, context),
-                        height: responsiveSize.getHeight(60, context),
+                        height: responsiveSize.getWidth(60, context),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                             10,
@@ -212,9 +212,7 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
               ),
             ],
           ),
-          Container(
-            width: double.infinity,
-            height: 300,
+          Expanded(
             child: IndexedStack(
               index: stackIndex,
               children: pages,
@@ -236,11 +234,19 @@ class Orders extends StatefulWidget {
 class _OrdersState extends State<Orders> {
   @override
   Widget build(BuildContext context) {
-    return
-           Container(
-            color: Colors.green,
+    return ListView.builder(
+        itemCount: 50,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              color: Colors.red,
+              child: Text(
+                'hello',
+              ),
+            ),
           );
-
+        });
   }
 }
 
@@ -255,9 +261,8 @@ class _FavoritesState extends State<Favorites> {
   @override
   Widget build(BuildContext context) {
     return Container(
-            color: Colors.red,
-          );
-
+      color: Colors.red,
+    );
   }
 }
 
@@ -271,11 +276,9 @@ class Info extends StatefulWidget {
 class _InfoState extends State<Info> {
   @override
   Widget build(BuildContext context) {
-
-          return Container(
-            color: Colors.pink,
-          );
-
+    return Container(
+      color: Colors.pink,
+    );
   }
 }
 
@@ -289,10 +292,8 @@ class Notifications extends StatefulWidget {
 class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
-
-          return Container(
-            color: Colors.purple,
-          );
-
+    return Container(
+      color: Colors.purple,
+    );
   }
 }
