@@ -64,7 +64,7 @@ class _VerificationCodeState extends State<VerificationCode> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChannels.textInput.invokeMethod('TextInput.show');
+    //SystemChannels.textInput.invokeMethod('TextInput.show');
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
