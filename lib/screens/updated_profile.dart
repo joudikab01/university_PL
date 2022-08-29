@@ -93,7 +93,7 @@ class _UpdatedProfileState extends State<UpdatedProfile> {
               ),
               Positioned(
                 width: MediaQuery.of(context).size.width,
-                bottom: 50,
+                bottom: MediaQuery.of(context).size.height / 18,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

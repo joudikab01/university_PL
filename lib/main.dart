@@ -87,7 +87,7 @@ class MyApp extends StatelessWidget {
         //     ),
         //   ),
         //),
-        home: Home(),
+        home: VerificationCode(),
         //initialRoute: !isToken ? '/splash_screen' : '/home',
         routes: {
           '/log_in': (context) => const LoginScreen(),
@@ -100,6 +100,7 @@ class MyApp extends StatelessWidget {
           '/products': (context) => const ProductsScreen(),
           '/categories': (context) => const CategoriesScreen(),
           '/sorted_products': (context) => const SortedProduct(),
+          '/verification': (context) =>const VerificationCode(),
         },
       ),
     );

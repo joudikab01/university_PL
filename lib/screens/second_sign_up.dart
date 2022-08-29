@@ -230,7 +230,7 @@ class _SecondSignUpScreenState extends State<SecondSignUpScreen> {
                             Provider.of<ProductsManager>(context, listen: false)
                                 .setToken(signupData.token);
                             Provider.of<ProductsManager>(context,listen: false).setUser(signupData.user);
-                            Navigator.pushReplacementNamed(context, '/home');
+                            Navigator.pushReplacementNamed(context, '/verification');
                           }
                         } catch (e) {
                           try {
