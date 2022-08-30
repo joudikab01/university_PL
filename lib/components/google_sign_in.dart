@@ -19,21 +19,31 @@ class _GoogleSignInState extends State<GoogleSignIn> {
     return !isLoading
         ? SizedBox(
             width: size.width * 0.8,
+            height: size.height / 14,
             child: OutlinedButton.icon(
-              icon: FaIcon(FontAwesomeIcons.google),
+              icon: const FaIcon(
+                FontAwesomeIcons.google,
+                color: Colors.blueGrey,
+              ),
               onPressed: () async {
                 setState(() {
                   isLoading = true;
                 });
                 FirebaseService service = FirebaseService();
                 try {
-                  String? abd= await service.signInwithGoogle();
+                  String? abd = await service.signInwithGoogle();
                   Navigator.pushNamedAndRemoveUntil(
                       context, '/home', (route) => false);
                   showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                            title: SingleChildScrollView(child: Text(abd!,style: TextStyle(fontSize: 7),)),
+                            title: SingleChildScrollView(
+                                child: Text(
+                              abd!,
+                              style: const TextStyle(
+                                fontSize: 7,
+                              ),
+                            )),
                           ));
                 } catch (e) {
                   if (e is FirebaseAuthException) {
@@ -44,18 +54,20 @@ class _GoogleSignInState extends State<GoogleSignIn> {
                   isLoading = false;
                 });
               },
-              label: Text(
-                'Sign in with google',
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              label: const Text(
+                'Sign in with Google',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.grey),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.white.withBlue(245).withGreen(245).withRed(245)),
                   side: MaterialStateProperty.all<BorderSide>(BorderSide.none)),
             ),
           )
-        : CircularProgressIndicator();
+        : const CircularProgressIndicator();
   }
 
   void showMessage(String message) {
@@ -63,11 +75,11 @@ class _GoogleSignInState extends State<GoogleSignIn> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Error"),
+            title: const Text("Error"),
             content: Text(message),
             actions: [
               TextButton(
-                child: Text("Ok"),
+                child: const Text("Ok"),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

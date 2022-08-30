@@ -64,24 +64,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(
+                          15,
+                        ),
                         child: Text(
                           isEng ? 'LOGIN' : 'تسجيل الدخول',
                           style: isEng
                               ? GoogleFonts.archivoBlack(
                                   color: Colors.black,
-                                  fontSize: q / 20,
+                                  fontSize: 22,
                                   fontWeight: FontWeight.bold,
                                 )
                               : GoogleFonts.tajawal(
                                   color: Colors.black,
-                                  fontSize: q / 20,
+                                  fontSize: 22,
                                   fontWeight: FontWeight.bold,
                                 ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 12,
+                        ),
                         child: SizedBox(
                           height: height / 4,
                           width: width,
@@ -95,7 +99,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 25, horizontal: 15),
+                          vertical: 25,
+                          horizontal: 15,
+                        ),
                         child: Directionality(
                           textDirection:
                               isEng ? TextDirection.ltr : TextDirection.rtl,
@@ -123,13 +129,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(
+                                    8,
+                                  ),
                                   borderSide: const BorderSide(
                                     width: 2,
                                   ),
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(
+                                    20,
+                                  ),
                                   borderSide: const BorderSide(
                                       width: 2, color: Colors.black26),
                                 ),
@@ -146,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 icon: FaIcon(
                                   Icons.mail_rounded,
                                   color: Colors.black,
-                                  size: q / 20,
+                                  size: 22,
                                 ),
                                 fillColor: Colors.blueGrey),
                           ),
@@ -174,21 +184,28 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ? 'check your password'
                                     : 'تأكد من كلمة السر الخاصة بك';
                               }
+                              return null;
                             },
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(
+                                  8,
+                                ),
                                 borderSide: const BorderSide(
                                   width: 2,
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(
+                                  20,
+                                ),
                                 borderSide: const BorderSide(
                                     width: 2, color: Colors.black26),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(
+                                  8,
+                                ),
                                 borderSide: const BorderSide(
                                   width: 2,
                                   color: Colors.blueGrey,
@@ -200,7 +217,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               icon: FaIcon(
                                 FontAwesomeIcons.lock,
                                 color: Colors.black,
-                                size: q / 20,
+                                size: 22,
                               ),
                               suffixIcon: IconButton(
                                 color: Colors.grey,
@@ -209,17 +226,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                     hidePassword = !hidePassword;
                                   });
                                 },
-                                icon: Icon(!hidePassword
-                                    ? Icons.remove_red_eye_rounded
-                                    : Ionicons.eye_off),
-                                iconSize: q / 16,
+                                icon: Icon(
+                                  !hidePassword
+                                      ? Icons.remove_red_eye_rounded
+                                      : Ionicons.eye_off,
+                                ),
+                                iconSize: 16,
                               ),
                             ),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 5),
+                        padding: const EdgeInsets.only(
+                          top: 5,
+                        ),
                         child: AnimatedButton(
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
@@ -273,7 +294,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Text(
                             isEng ? 'Log In' : 'تسجيل الدخول',
                             style: GoogleFonts.arya(
-                                fontSize: q / 22, color: Colors.white),
+                                fontSize: 22, color: Colors.white),
                           ),
                           color: Colors.blueGrey,
                           width: width / 3.5,
@@ -284,17 +305,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Padding(
-                  padding:  const EdgeInsets.symmetric(horizontal: 15, vertical: 22),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 22,
+                  ),
                   child: SizedBox(
                     width: size.width * 0.8,
                     child: Row(children: <Widget>[
-                      Expanded(child: Divider(color: Colors.grey)),
+                      const Expanded(
+                        child: Divider(
+                          color: Colors.grey,
+                        ),
+                      ),
                       Padding(
-                          padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                          child: Text(
-                            "Or",
-                            style: TextStyle(color: Colors.grey),
-                          )),
+                        padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: Text(
+                          "Or",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ),
                       Expanded(child: Divider(color: Colors.grey)),
                     ]),
                   ),
@@ -313,9 +342,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           isEng ? "Don't have an account?" : 'لا تملك حساب؟',
                           style: isEng
                               ? GoogleFonts.actor(
-                                  color: Colors.black, fontSize: q / 26)
+                                  color: Colors.black, fontSize: 18,)
                               : GoogleFonts.tajawal(
-                                  color: Colors.black, fontSize: q / 26),
+                                  color: Colors.black, fontSize: 18,),
                         ),
                         TextButton(
                           onPressed: () {
@@ -324,7 +353,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Text(
                             isEng ? 'Sign Up' : 'إنشاء حساب',
                             style: GoogleFonts.actor(
-                                color: Colors.blueGrey, fontSize: q / 22),
+                              color: Colors.blueGrey,
+                              fontSize: 18,
+                            ),
                           ),
                         ),
                       ],
