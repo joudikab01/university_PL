@@ -3,7 +3,6 @@ import 'package:animated_button/animated_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'dart:math';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -49,7 +48,6 @@ class _LoginScreenState extends State<LoginScreen> {
     var size = MediaQuery.of(context).size;
     var height = size.height;
     var width = size.width;
-    var q = min(height, width);
     return SafeArea(
       child: Consumer<ProductsManager>(builder: (context, manager, child) {
         bool isEng = manager.getLocal();
@@ -153,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 hintText: isEng
                                     ? 'Enter your Email'
                                     : 'أدخل بريدك الإلكتروني',
-                                icon: FaIcon(
+                                icon: const FaIcon(
                                   Icons.mail_rounded,
                                   color: Colors.black,
                                   size: 22,
@@ -214,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               hintText: isEng
                                   ? 'Enter your password'
                                   : 'أدخل كلمة السر',
-                              icon: FaIcon(
+                              icon: const FaIcon(
                                 FontAwesomeIcons.lock,
                                 color: Colors.black,
                                 size: 22,
@@ -311,8 +309,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: SizedBox(
                     width: size.width * 0.8,
-                    child: Row(children: <Widget>[
-                      const Expanded(
+                    child: Row(children: const <Widget>[
+                      Expanded(
                         child: Divider(
                           color: Colors.grey,
                         ),

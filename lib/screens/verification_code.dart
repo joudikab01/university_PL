@@ -34,34 +34,17 @@ class _VerificationCodeState extends State<VerificationCode> {
 
   @override
   void initState() {
-    // SystemChannels.textInput.invokeMethod('TextInput.show');
-    // firstFocusNode = FocusNode();
-    // firstFocusNode.addListener(() {
-    //   setState(() {});
-    // });
-    // secondFocusNode = FocusNode();
-    // secondFocusNode.addListener(() {
-    //   setState(() {});
-    // });
-    // thirdFocusNode = FocusNode();
-    // thirdFocusNode.addListener(() {
-    //   setState(() {});
-    // });
-    // fourthFocusNode = FocusNode();
-    // fourthFocusNode.addListener(() {
-    //   setState(() {});
-    // });
-    // fifthFocusNode = FocusNode();
-    // fifthFocusNode.addListener(() {
-    //   setState(() {});
-    // });
-    // sixthFocusNode = FocusNode();
-    // sixthFocusNode.addListener(() {
-    //   setState(() {});
-    // });
     super.initState();
   }
 
+  static bool isMobile(BuildContext context) =>
+      MediaQuery.of(context).size.width < 900;
+
+  static bool isTablet(BuildContext context) =>
+      MediaQuery.of(context).size.width >= 750 ;
+
+  static bool isDesktop(BuildContext context) =>
+      MediaQuery.of(context).size.width >= 1200;
   @override
   Widget build(BuildContext context) {
     //SystemChannels.textInput.invokeMethod('TextInput.show');
@@ -70,16 +53,17 @@ class _VerificationCodeState extends State<VerificationCode> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
-        title: Text(
+        title:  Text(
           'Verification code',
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
+            fontSize: !isTablet(context)?20:30,
           ),
         ),
         centerTitle: true,
         backgroundColor: Colors.white,
-        leading: Icon(
+        leading: const Icon(
           Icons.arrow_back_ios,
           color: Colors.black,
         ),
@@ -91,7 +75,10 @@ class _VerificationCodeState extends State<VerificationCode> {
               color: Colors.white,
             ),
             width: double.infinity,
-            height: responsiveSize.getHeight(200, context),
+            height: responsiveSize.getHeight(
+              140,
+              context,
+            ),
           ),
           Expanded(
             child: Container(
@@ -113,30 +100,30 @@ class _VerificationCodeState extends State<VerificationCode> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                     Text(
                       'CONFIRMATION',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24
-                      ),
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: !isTablet(context)?24:28,),
                     ),
-                    const Text(
+                     Text(
                       'Please type the verification code sent to joudi.kab01@gmail.com',
-                      maxLines: 2,
+                      maxLines: 3,
                       style: TextStyle(
                         overflow: TextOverflow.ellipsis,
-                        color: Color.fromRGBO(
+                        color: const Color.fromRGBO(
                           240,
                           240,
                           240,
                           1,
                         ),
                         fontWeight: FontWeight.w400,
+                        fontSize: !isTablet(context)?16:22,
                       ),
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
                           decoration: BoxDecoration(
@@ -145,17 +132,21 @@ class _VerificationCodeState extends State<VerificationCode> {
                                 ? Colors.white
                                 : Colors.blueGrey.shade200,
                           ),
-                          width: MediaQuery.of(context).size.width / 8,
-                          height: MediaQuery.of(context).size.width / 8,
+                          width: isMobile(context)
+                              ? MediaQuery.of(context).size.width / 8
+                              : MediaQuery.of(context).size.width / 14,
+                          height: isMobile(context)
+                              ? MediaQuery.of(context).size.width / 8
+                              : MediaQuery.of(context).size.width / 14,
                           child: Center(
                             child: Text(
                               code[0],
                               style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: selected == 1
-                                      ? Colors.black
-                                      : Colors.white),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color:
+                                    selected == 1 ? Colors.black : Colors.white,
+                              ),
                             ),
                           ),
                         ),
@@ -166,17 +157,21 @@ class _VerificationCodeState extends State<VerificationCode> {
                                 ? Colors.white
                                 : Colors.blueGrey.shade200,
                           ),
-                          width: MediaQuery.of(context).size.width / 8,
-                          height: MediaQuery.of(context).size.width / 8,
+                          width: isMobile(context)
+                              ? MediaQuery.of(context).size.width / 8
+                              : MediaQuery.of(context).size.width / 14,
+                          height: isMobile(context)
+                              ? MediaQuery.of(context).size.width / 8
+                              : MediaQuery.of(context).size.width / 14,
                           child: Center(
                             child: Text(
                               code[1],
                               style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: selected == 2
-                                      ? Colors.black
-                                      : Colors.white),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color:
+                                    selected == 2 ? Colors.black : Colors.white,
+                              ),
                             ),
                           ),
                         ),
@@ -187,17 +182,21 @@ class _VerificationCodeState extends State<VerificationCode> {
                                 ? Colors.white
                                 : Colors.blueGrey.shade200,
                           ),
-                          width: MediaQuery.of(context).size.width / 8,
-                          height: MediaQuery.of(context).size.width / 8,
+                          width: isMobile(context)
+                              ? MediaQuery.of(context).size.width / 8
+                              : MediaQuery.of(context).size.width / 14,
+                          height: isMobile(context)
+                              ? MediaQuery.of(context).size.width / 8
+                              : MediaQuery.of(context).size.width / 14,
                           child: Center(
                             child: Text(
                               code[2],
                               style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: selected == 3
-                                      ? Colors.black
-                                      : Colors.white),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color:
+                                    selected == 3 ? Colors.black : Colors.white,
+                              ),
                             ),
                           ),
                         ),
@@ -208,17 +207,21 @@ class _VerificationCodeState extends State<VerificationCode> {
                                 ? Colors.white
                                 : Colors.blueGrey.shade200,
                           ),
-                          width: MediaQuery.of(context).size.width / 8,
-                          height: MediaQuery.of(context).size.width / 8,
+                          width: isMobile(context)
+                              ? MediaQuery.of(context).size.width / 8
+                              : MediaQuery.of(context).size.width / 14,
+                          height: isMobile(context)
+                              ? MediaQuery.of(context).size.width / 8
+                              : MediaQuery.of(context).size.width / 14,
                           child: Center(
                             child: Text(
                               code[3],
                               style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: selected == 4
-                                      ? Colors.black
-                                      : Colors.white),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color:
+                                    selected == 4 ? Colors.black : Colors.white,
+                              ),
                             ),
                           ),
                         ),
@@ -229,17 +232,21 @@ class _VerificationCodeState extends State<VerificationCode> {
                                 ? Colors.white
                                 : Colors.blueGrey.shade200,
                           ),
-                          width: MediaQuery.of(context).size.width / 8,
-                          height: MediaQuery.of(context).size.width / 8,
+                          width: isMobile(context)
+                              ? MediaQuery.of(context).size.width / 8
+                              : MediaQuery.of(context).size.width / 14,
+                          height: isMobile(context)
+                              ? MediaQuery.of(context).size.width / 8
+                              : MediaQuery.of(context).size.width / 14,
                           child: Center(
                             child: Text(
                               code[4],
                               style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: selected == 5
-                                      ? Colors.black
-                                      : Colors.white),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color:
+                                    selected == 5 ? Colors.black : Colors.white,
+                              ),
                             ),
                           ),
                         ),
@@ -250,439 +257,35 @@ class _VerificationCodeState extends State<VerificationCode> {
                                 ? Colors.white
                                 : Colors.blueGrey.shade200,
                           ),
-                          width: MediaQuery.of(context).size.width / 8,
-                          height: MediaQuery.of(context).size.width / 8,
+                          width: isMobile(context)
+                              ? MediaQuery.of(context).size.width / 8
+                              : MediaQuery.of(context).size.width / 14,
+                          height: isMobile(context)
+                              ? MediaQuery.of(context).size.width / 8
+                              : MediaQuery.of(context).size.width / 14,
                           child: Center(
                             child: Text(
                               code[5],
                               style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: selected == 6
-                                      ? Colors.black
-                                      : Colors.white),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color:
+                                    selected == 6 ? Colors.black : Colors.white,
+                              ),
                             ),
                           ),
                         ),
                       ],
                     ),
-                    // Form(
-                    //   key: _formKey,
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    //     children: [
-                    //       SizedBox(
-                    //         width: MediaQuery.of(context).size.width / 8,
-                    //         child: TextFormField(
-                    //           onEditingComplete: () {},
-                    //           autofocus: true,
-                    //           onFieldSubmitted: (value) {
-                    //             fieldFocusChange(
-                    //                 context, firstFocusNode, secondFocusNode);
-                    //           },
-                    //           textInputAction: TextInputAction.next,
-                    //           textAlign: TextAlign.center,
-                    //           style: TextStyle(
-                    //             color: firstFocusNode.hasFocus
-                    //                 ? Colors.black
-                    //                 : Colors.white,
-                    //           ),
-                    //           inputFormatters: [
-                    //             FilteringTextInputFormatter.digitsOnly,
-                    //             LengthLimitingTextInputFormatter(1),
-                    //             FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                    //           ],
-                    //           cursorColor: Colors.blueGrey,
-                    //           controller: firstController,
-                    //           focusNode: firstFocusNode,
-                    //           decoration: InputDecoration(
-                    //             border: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: firstFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             enabledBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: firstFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             focusedBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: firstFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             fillColor: firstFocusNode.hasFocus
-                    //                 ? Colors.white
-                    //                 : Colors.blueGrey.shade300,
-                    //             filled: true,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       SizedBox(
-                    //         width: MediaQuery.of(context).size.width / 8,
-                    //         child: TextFormField(
-                    //           onEditingComplete: () {},
-                    //           onFieldSubmitted: (value) {
-                    //             fieldFocusChange(
-                    //                 context, secondFocusNode, thirdFocusNode);
-                    //           },
-                    //           textInputAction: TextInputAction.next,
-                    //           textAlign: TextAlign.center,
-                    //           style: TextStyle(
-                    //             color: secondFocusNode.hasFocus
-                    //                 ? Colors.black
-                    //                 : Colors.white,
-                    //           ),
-                    //           inputFormatters: [
-                    //             FilteringTextInputFormatter.digitsOnly,
-                    //             LengthLimitingTextInputFormatter(1),
-                    //             FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                    //           ],
-                    //           cursorColor: Colors.blueGrey,
-                    //           controller: secondController,
-                    //           focusNode: secondFocusNode,
-                    //           decoration: InputDecoration(
-                    //             border: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: secondFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             enabledBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: secondFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             focusedBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: secondFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             fillColor: secondFocusNode.hasFocus
-                    //                 ? Colors.white
-                    //                 : Colors.blueGrey.shade300,
-                    //             filled: true,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       SizedBox(
-                    //         width: MediaQuery.of(context).size.width / 8,
-                    //         child: TextFormField(
-                    //           onEditingComplete: () {},
-                    //           onFieldSubmitted: (value) {
-                    //             fieldFocusChange(
-                    //                 context, thirdFocusNode, fourthFocusNode);
-                    //           },
-                    //           textInputAction: TextInputAction.next,
-                    //           textAlign: TextAlign.center,
-                    //           style: TextStyle(
-                    //             color: thirdFocusNode.hasFocus
-                    //                 ? Colors.black
-                    //                 : Colors.white,
-                    //           ),
-                    //           inputFormatters: [
-                    //             FilteringTextInputFormatter.digitsOnly,
-                    //             LengthLimitingTextInputFormatter(1),
-                    //             FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                    //           ],
-                    //           cursorColor: Colors.blueGrey,
-                    //           controller: thirdController,
-                    //           focusNode: thirdFocusNode,
-                    //           decoration: InputDecoration(
-                    //             border: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: thirdFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             enabledBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: thirdFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             focusedBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: thirdFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             fillColor: thirdFocusNode.hasFocus
-                    //                 ? Colors.white
-                    //                 : Colors.blueGrey.shade300,
-                    //             filled: true,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       SizedBox(
-                    //         width: MediaQuery.of(context).size.width / 8,
-                    //         child: TextFormField(
-                    //           onEditingComplete: () {},
-                    //           onFieldSubmitted: (value) {
-                    //             fieldFocusChange(
-                    //                 context, fourthFocusNode, fifthFocusNode);
-                    //           },
-                    //           textInputAction: TextInputAction.next,
-                    //           textAlign: TextAlign.center,
-                    //           style: TextStyle(
-                    //             color: fourthFocusNode.hasFocus
-                    //                 ? Colors.black
-                    //                 : Colors.white,
-                    //           ),
-                    //           inputFormatters: [
-                    //             FilteringTextInputFormatter.digitsOnly,
-                    //             LengthLimitingTextInputFormatter(1),
-                    //             FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                    //           ],
-                    //           cursorColor: Colors.blueGrey,
-                    //           controller: fourthController,
-                    //           focusNode: fourthFocusNode,
-                    //           decoration: InputDecoration(
-                    //             border: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: fourthFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             enabledBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: fourthFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             focusedBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: fourthFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             fillColor: fourthFocusNode.hasFocus
-                    //                 ? Colors.white
-                    //                 : Colors.blueGrey.shade300,
-                    //             filled: true,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       SizedBox(
-                    //         width: MediaQuery.of(context).size.width / 8,
-                    //         child: TextFormField(
-                    //           onEditingComplete: () {},
-                    //           onFieldSubmitted: (value) {
-                    //             fieldFocusChange(
-                    //                 context, fifthFocusNode, sixthFocusNode);
-                    //           },
-                    //           textInputAction: TextInputAction.next,
-                    //           textAlign: TextAlign.center,
-                    //           style: TextStyle(
-                    //             color: fifthFocusNode.hasFocus
-                    //                 ? Colors.black
-                    //                 : Colors.white,
-                    //           ),
-                    //           inputFormatters: [
-                    //             FilteringTextInputFormatter.digitsOnly,
-                    //             LengthLimitingTextInputFormatter(1),
-                    //             FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                    //           ],
-                    //           cursorColor: Colors.blueGrey,
-                    //           controller: fifthController,
-                    //           focusNode: fifthFocusNode,
-                    //           decoration: InputDecoration(
-                    //             border: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: fifthFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             enabledBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: fifthFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             focusedBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: fifthFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             fillColor: fifthFocusNode.hasFocus
-                    //                 ? Colors.white
-                    //                 : Colors.blueGrey.shade300,
-                    //             filled: true,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       SizedBox(
-                    //
-                    //         width: MediaQuery.of(context).size.width / 8,
-                    //         child: TextFormField(
-                    //           onEditingComplete: () {},
-                    //           textInputAction: TextInputAction.none,
-                    //           textAlign: TextAlign.center,
-                    //           style: TextStyle(
-                    //             color: sixthFocusNode.hasFocus
-                    //                 ? Colors.black
-                    //                 : Colors.white,
-                    //           ),
-                    //           inputFormatters: [
-                    //             FilteringTextInputFormatter.digitsOnly,
-                    //             LengthLimitingTextInputFormatter(1),
-                    //             FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                    //           ],
-                    //           cursorColor: Colors.blueGrey,
-                    //           controller: sixthController,
-                    //           focusNode: sixthFocusNode,
-                    //           decoration: InputDecoration(
-                    //             border: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: sixthFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             enabledBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: sixthFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             focusedBorder: OutlineInputBorder(
-                    //               borderRadius: BorderRadius.circular(
-                    //                 30,
-                    //               ),
-                    //               borderSide: BorderSide(
-                    //                 width: 2,
-                    //                 style: BorderStyle.none,
-                    //                 color: sixthFocusNode.hasFocus
-                    //                     ? Colors.white
-                    //                     : Colors.blueGrey.shade300,
-                    //               ),
-                    //             ),
-                    //             fillColor: sixthFocusNode.hasFocus
-                    //                 ? Colors.white
-                    //                 : Colors.blueGrey.shade300,
-                    //             filled: true,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     Center(
                       child: TextButton(
                         onPressed: () {},
                         child: Text(
                           'Resend code',
                           style: TextStyle(
-                            color:Colors.blueGrey.shade200,
+                            color: Colors.blueGrey.shade200,
                             fontWeight: FontWeight.w600,
-                            fontSize: 16
+                            fontSize: !isTablet(context)?18:22,
                           ),
                         ),
                       ),
@@ -691,29 +294,34 @@ class _VerificationCodeState extends State<VerificationCode> {
                       child: ElevatedButton(
                         onPressed: () {},
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.blueGrey.shade200),
-                            shape: MaterialStateProperty
-                                .all<OutlinedBorder?>(
-                              RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius
-                                    .circular(12),
+                          backgroundColor: MaterialStateProperty.all(
+                              Colors.blueGrey.shade200),
+                          shape: MaterialStateProperty.all<OutlinedBorder?>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                12,
                               ),
                             ),
-                          fixedSize: MaterialStateProperty.all(Size(MediaQuery.of(context).size.width-60, 50))
+                          ),
+                          fixedSize: MaterialStateProperty.all(
+                            Size(
+                              MediaQuery.of(context).size.width - 60,
+                              MediaQuery.of(context).size.height/17,
+                            ),
+                          ),
                         ),
-                        child: const Text(
+                        child:  Text(
                           'VERIFY',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
-                            fontSize: 20
+                            fontSize: !isTablet(context)?20:24,
                           ),
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 250,
+                      height: MediaQuery.of(context).size.height/3,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -902,7 +510,7 @@ class _VerificationCodeState extends State<VerificationCode> {
                                 onTap: () {
                                   if (selected > 0) {
                                     setState(() {
-                                      code[selected-1] = '';
+                                      code[selected - 1] = '';
                                       selected = selected - 1;
                                     });
                                   }
@@ -926,29 +534,4 @@ class _VerificationCodeState extends State<VerificationCode> {
       ),
     );
   }
-
-  // @override
-  // void dispose() {
-  //   firstController.dispose();
-  //   secondController.dispose();
-  //   thirdController.dispose();
-  //   fourthController.dispose();
-  //   fifthController.dispose();
-  //   sixthController.dispose();
-  //
-  //   firstFocusNode.dispose();
-  //   secondFocusNode.dispose();
-  //   thirdFocusNode.dispose();
-  //   fourthFocusNode.dispose();
-  //   fifthFocusNode.dispose();
-  //   sixthFocusNode.dispose();
-  //
-  //   firstFocusNode.removeListener(() {});
-  //   secondFocusNode.removeListener(() {});
-  //   thirdFocusNode.removeListener(() {});
-  //   fourthFocusNode.removeListener(() {});
-  //   fifthFocusNode.removeListener(() {});
-  //   sixthFocusNode.removeListener(() {});
-  //   super.dispose();
-  // }
 }
