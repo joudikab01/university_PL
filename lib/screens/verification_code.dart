@@ -142,7 +142,7 @@ class _VerificationCodeState extends State<VerificationCode> {
                             child: Text(
                               code[0],
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: !isTablet(context)?20:32,
                                 fontWeight: FontWeight.w600,
                                 color:
                                     selected == 1 ? Colors.black : Colors.white,
@@ -167,7 +167,7 @@ class _VerificationCodeState extends State<VerificationCode> {
                             child: Text(
                               code[1],
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: !isTablet(context)?20:32,
                                 fontWeight: FontWeight.w600,
                                 color:
                                     selected == 2 ? Colors.black : Colors.white,
@@ -192,7 +192,7 @@ class _VerificationCodeState extends State<VerificationCode> {
                             child: Text(
                               code[2],
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: !isTablet(context)?20:32,
                                 fontWeight: FontWeight.w600,
                                 color:
                                     selected == 3 ? Colors.black : Colors.white,
@@ -217,7 +217,7 @@ class _VerificationCodeState extends State<VerificationCode> {
                             child: Text(
                               code[3],
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: !isTablet(context)?20:32,
                                 fontWeight: FontWeight.w600,
                                 color:
                                     selected == 4 ? Colors.black : Colors.white,
@@ -242,7 +242,7 @@ class _VerificationCodeState extends State<VerificationCode> {
                             child: Text(
                               code[4],
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: !isTablet(context)?20:32,
                                 fontWeight: FontWeight.w600,
                                 color:
                                     selected == 5 ? Colors.black : Colors.white,
@@ -267,7 +267,7 @@ class _VerificationCodeState extends State<VerificationCode> {
                             child: Text(
                               code[5],
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: !isTablet(context)?20:32,
                                 fontWeight: FontWeight.w600,
                                 color:
                                     selected == 6 ? Colors.black : Colors.white,
