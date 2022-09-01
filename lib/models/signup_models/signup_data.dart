@@ -1,6 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../models.dart';
 part 'signup_data.g.dart';
+
+
+
 @JsonSerializable()
 class SignupData {
   UserSign user;

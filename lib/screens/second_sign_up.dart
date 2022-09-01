@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:animated_button/animated_button.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:uni_project/screens/screens.dart';
 import 'dart:math';
@@ -29,6 +30,9 @@ class _SecondSignUpScreenState extends State<SecondSignUpScreen> {
   late FocusNode facebookFocusNode;
   @override
   void initState() {
+    FirebaseMessaging.instance
+        .getToken()
+        .then((value) => print('token is $value'));
     nameFocusNode = FocusNode();
     phoneNumberFocusNode = FocusNode();
     facebookFocusNode = FocusNode();
@@ -75,8 +79,10 @@ class _SecondSignUpScreenState extends State<SecondSignUpScreen> {
                       children: [
                         IconButton(
                           onPressed: () {
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> SignUpScreen()));
-
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignUpScreen()));
                           },
                           icon: Icon(
                             Icons.arrow_back_ios_rounded,
@@ -290,46 +296,46 @@ class _SecondSignUpScreenState extends State<SecondSignUpScreen> {
                                 phoneNumberController.text,
                                 facebookController.text,
                               );
-                              try {
-                                SignupData signupData =
-                                    await Provider.of<ProductsManager>(
-                                  context,
-                                  listen: false,
-                                ).signUp2();
-                                if (signupData.token != 'error') {
-                                  Provider.of<ProductsManager>(context,
-                                          listen: false)
-                                      .setToken(signupData.token);
-                                  Provider.of<ProductsManager>(context,
-                                          listen: false)
-                                      .setUser(signupData.user);
-                                  Navigator.pushReplacementNamed(
-                                      context, '/verification');
-                                }
-                              } catch (e) {
-                                try {
-                                  final result = await InternetAddress.lookup(
-                                      'example.com');
-                                  if (result.isNotEmpty &&
-                                      result[0].rawAddress.isNotEmpty) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(isEng
-                                            ? 'Check your info and try again'
-                                            : 'تأكد من بياناتك ثم أعد المحاولة'),
-                                      ),
-                                    );
-                                  }
-                                } on SocketException catch (_) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(isEng
-                                          ? 'Check your internet connection'
-                                          : 'تأكد من اتصالك بالإنترنت ثم أعد المحاولة'),
-                                    ),
-                                  );
-                                }
-                              }
+                              // try {
+                              //   SignupData signupData =
+                              //       await Provider.of<ProductsManager>(
+                              //     context,
+                              //     listen: false,
+                              //   ).signUp2();
+                              //   if (signupData.token != 'error') {
+                              //     Provider.of<ProductsManager>(context,
+                              //             listen: false)
+                              //         .setToken(signupData.token);
+                              //     Provider.of<ProductsManager>(context,
+                              //             listen: false)
+                              //         .setUser(signupData.user);
+                              //     Navigator.pushReplacementNamed(
+                              //         context, '/verification');
+                              //   }
+                              // } catch (e) {
+                              //   try {
+                              //     final result = await InternetAddress.lookup(
+                              //         'example.com');
+                              //     if (result.isNotEmpty &&
+                              //         result[0].rawAddress.isNotEmpty) {
+                              //       ScaffoldMessenger.of(context).showSnackBar(
+                              //         SnackBar(
+                              //           content: Text(isEng
+                              //               ? 'Check your info and try again'
+                              //               : 'تأكد من بياناتك ثم أعد المحاولة'),
+                              //         ),
+                              //       );
+                              //     }
+                              //   } on SocketException catch (_) {
+                              //     ScaffoldMessenger.of(context).showSnackBar(
+                              //       SnackBar(
+                              //         content: Text(isEng
+                              //             ? 'Check your internet connection'
+                              //             : 'تأكد من اتصالك بالإنترنت ثم أعد المحاولة'),
+                              //       ),
+                              //     );
+                              //   }
+                              // }
                             },
                             color: Colors.blueGrey,
                             width: width / 2.5,
