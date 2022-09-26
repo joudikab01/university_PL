@@ -1,5 +1,5 @@
 void main() {
-  request('Login', 'loginResponse', 'logIn');
+  request('SignUpWithGoogle', 'signUpWithGoogleResponse', 'signUpWithGoogle');
 }
 
 void request(String model, String response, String funcName) {

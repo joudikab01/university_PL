@@ -87,8 +87,8 @@ class MyApp extends StatelessWidget {
         //     ),
         //   ),
         //),
-        home: SecondSignUpScreen(),
-        //initialRoute: !isToken ? '/splash_screen' : '/home',
+        //home: SecondSignUpScreen(),
+        initialRoute: !isToken ? '/splash_screen' : '/home',
         routes: {
           '/log_in': (context) => const LoginScreen(),
           '/home': (context) => const Home(),

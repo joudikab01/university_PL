@@ -61,8 +61,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(
-                        15,
+                      padding: const EdgeInsets.only(
+                        top: 35,
+                        left: 15,
+                        right: 15,
+                        bottom: 15,
                       ),
                       child: Text(
                         isEng ? 'LOGIN' : 'تسجيل الدخول',
@@ -241,15 +244,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: AnimatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            Provider.of<ProductsManager>(context,
-                                    listen: false)
+                            Provider.of<ProductsManager>(context, listen: false)
                                 .setLoginData(emailController.text,
                                     passwordController.text);
                             try {
-                              Login login =
-                                  await Provider.of<ProductsManager>(context,
-                                          listen: false)
-                                      .logIn2();
+                              Login login = await Provider.of<ProductsManager>(
+                                      context,
+                                      listen: false)
+                                  .logIn2();
+
                               if (login.token != 'error') {
                                 Provider.of<ProductsManager>(context,
                                         listen: false)
@@ -262,8 +265,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               }
                             } catch (e) {
                               try {
-                                final result = await InternetAddress.lookup(
-                                    'example.com');
+                                final result =
+                                    await InternetAddress.lookup('example.com');
                                 if (result.isNotEmpty &&
                                     result[0].rawAddress.isNotEmpty) {
                                   ScaffoldMessenger.of(context).showSnackBar(
@@ -325,13 +328,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ]),
                 ),
               ),
-              const go.GoogleSignIn(),
+              go.GoogleSignIn(context),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 22),
                 child: Directionality(
-                  textDirection:
-                      isEng ? TextDirection.ltr : TextDirection.rtl,
+                  textDirection: isEng ? TextDirection.ltr : TextDirection.rtl,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -339,9 +341,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         isEng ? "Don't have an account?" : 'لا تملك حساب؟',
                         style: isEng
                             ? GoogleFonts.actor(
-                                color: Colors.black, fontSize: 18,)
+                                color: Colors.black,
+                                fontSize: 18,
+                              )
                             : GoogleFonts.tajawal(
-                                color: Colors.black, fontSize: 18,),
+                                color: Colors.black,
+                                fontSize: 18,
+                              ),
                       ),
                       TextButton(
                         onPressed: () {

@@ -17,4 +17,5 @@ export 'add_product_model/discount.dart';
 export 'edit_models/edit_product.dart';
 export 'user_products.dart';
 export 'color.dart';
+export 'signup_with_google.dart';
 

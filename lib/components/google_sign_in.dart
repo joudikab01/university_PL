@@ -1,10 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'firebase_service.dart';
 
 class GoogleSignIn extends StatefulWidget {
-  const GoogleSignIn({Key? key}) : super(key: key);
+  final BuildContext context;
+  const GoogleSignIn(this.context, {Key? key}) : super(key: key);
 
   @override
   _GoogleSignInState createState() => _GoogleSignInState();
@@ -31,7 +34,9 @@ class _GoogleSignInState extends State<GoogleSignIn> {
                 });
                 FirebaseService service = FirebaseService();
                 try {
-                  String? abd = await service.signInwithGoogle();
+                  print('before');
+                  String? abd = await service.signInWithGoogle(widget.context);
+                  print('after');
                   Navigator.pushNamedAndRemoveUntil(
                       context, '/home', (route) => false);
                   showDialog(
@@ -39,7 +44,7 @@ class _GoogleSignInState extends State<GoogleSignIn> {
                       builder: (context) => AlertDialog(
                             title: SingleChildScrollView(
                                 child: Text(
-                              abd!,
+                              abd??"",
                               style: const TextStyle(
                                 fontSize: 7,
                               ),

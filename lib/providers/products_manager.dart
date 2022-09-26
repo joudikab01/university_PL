@@ -47,15 +47,12 @@ class ProductsManager extends ChangeNotifier {
 
   ///////Hive  .........
 
-
-  bool getLike(int id)
-  {
+  bool getLike(int id) {
     var box = Boxes.getLikeBox();
     return box.get('$id') ?? false;
   }
 
-  void setLike(int id, bool value)
-  {
+  void setLike(int id, bool value) {
     var box = Boxes.getLikeBox();
     box.put('$id', value);
   }
@@ -115,7 +112,7 @@ class ProductsManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  void refresh(){
+  void refresh() {
     notifyListeners();
   }
 
@@ -124,6 +121,7 @@ class ProductsManager extends ChangeNotifier {
     DataService dataService = DataService(Dio());
     return dataService.getData();
   }
+
   ApiResponse<DataHome>? _dataHomeResponse;
   ApiResponse<DataHome>? get dataHomeResponse => _dataHomeResponse;
   set dataHomeResponse(ApiResponse<DataHome>? value) {
@@ -161,7 +159,8 @@ class ProductsManager extends ChangeNotifier {
   }
 
   ApiResponse<ProductDetails>? _productDetailsResponse;
-  ApiResponse<ProductDetails>? get productDetailsResponse => _productDetailsResponse;
+  ApiResponse<ProductDetails>? get productDetailsResponse =>
+      _productDetailsResponse;
   set productDetailsResponse(ApiResponse<ProductDetails>? value) {
     _productDetailsResponse = value;
     notifyListeners();
@@ -172,7 +171,8 @@ class ProductsManager extends ChangeNotifier {
     if (await checkInternet()) {
       productDetailsResponse = ApiResponse.loading('');
       try {
-        ProductDetails productDetails = await dataService.getProductDetails(id.toString());
+        ProductDetails productDetails =
+            await dataService.getProductDetails(id.toString());
         productDetailsResponse = ApiResponse.completed(productDetails);
       } catch (e) {
         if (e is DioError) {
@@ -186,7 +186,8 @@ class ProductsManager extends ChangeNotifier {
         return productDetailsResponse = ApiResponse.error(e.toString());
       }
     } else {
-      return productDetailsResponse = ApiResponse.error('No Internet Connection');
+      return productDetailsResponse =
+          ApiResponse.error('No Internet Connection');
     }
     return productDetailsResponse!;
   }
@@ -195,8 +196,10 @@ class ProductsManager extends ChangeNotifier {
     DataService dataService = DataService(Dio());
     return dataService.getAllCategories();
   }
+
   ApiResponse<DataCategories>? _dataCategoriesResponse;
-  ApiResponse<DataCategories>? get dataCategoriesResponse => _dataCategoriesResponse;
+  ApiResponse<DataCategories>? get dataCategoriesResponse =>
+      _dataCategoriesResponse;
   set dataCategoriesResponse(ApiResponse<DataCategories>? value) {
     _dataCategoriesResponse = value;
     notifyListeners();
@@ -221,7 +224,8 @@ class ProductsManager extends ChangeNotifier {
         return dataCategoriesResponse = ApiResponse.error(e.toString());
       }
     } else {
-      return dataCategoriesResponse = ApiResponse.error('No Internet Connection');
+      return dataCategoriesResponse =
+          ApiResponse.error('No Internet Connection');
     }
     return dataCategoriesResponse!;
   }
@@ -231,6 +235,7 @@ class ProductsManager extends ChangeNotifier {
     DataService dataService = DataService(Dio());
     return dataService.signUp(formData);
   }
+
   ApiResponse<SignupData>? _signupDataResponse;
   ApiResponse<SignupData>? get signupDataResponse => _signupDataResponse;
   set signupDataResponse(ApiResponse<SignupData>? value) {
@@ -265,9 +270,11 @@ class ProductsManager extends ChangeNotifier {
 
   Future<Login> logIn2() {
     FormData formData = FormData.fromMap(mapL);
+    print(mapL);
     DataService dataService = DataService(Dio());
     return dataService.logIn(formData);
   }
+
   ApiResponse<Login>? _loginResponse;
   ApiResponse<Login>? get loginResponse => _loginResponse;
   set loginResponse(ApiResponse<Login>? value) {
@@ -300,6 +307,46 @@ class ProductsManager extends ChangeNotifier {
     return loginResponse!;
   }
 
+  ApiResponse<SignUpWithGoogle>? _signUpWithGoogleResponse;
+  ApiResponse<SignUpWithGoogle>? get signUpWithGoogleResponse =>
+      _signUpWithGoogleResponse;
+  set signUpWithGoogleResponse(ApiResponse<SignUpWithGoogle>? value) {
+    _signUpWithGoogleResponse = value;
+    notifyListeners();
+  }
+
+  Future<ApiResponse<SignUpWithGoogle>> signUpWithGoogle(
+      String accessToken, String idToken) async {
+    DataService dataService = DataService(Dio());
+    if (await checkInternet()) {
+      signUpWithGoogleResponse = ApiResponse.loading('');
+      FormData formData = FormData.fromMap({
+        'accessToken': accessToken,
+        'provider': 'google',
+        'idToken': idToken,
+      });
+      try {
+        SignUpWithGoogle signupwithgoogle =
+            await dataService.signUpWithGoogle(formData);
+        signUpWithGoogleResponse = ApiResponse.completed(signupwithgoogle);
+      } catch (e) {
+        if (e is DioError) {
+          try {
+            throwCustomException(e);
+          } catch (forcedException) {
+            return signUpWithGoogleResponse =
+                ApiResponse.error(forcedException.toString());
+          }
+        }
+        return signUpWithGoogleResponse = ApiResponse.error(e.toString());
+      }
+    } else {
+      return signUpWithGoogleResponse =
+          ApiResponse.error('No Internet Connection');
+    }
+    return signUpWithGoogleResponse!;
+  }
+
   Future addProduct(String token, Map<String, dynamic> data) {
     DataService dataService = DataService(Dio());
     return dataService.addProduct(token, data);
@@ -327,68 +374,57 @@ class ProductsManager extends ChangeNotifier {
     notifyListeners();
   }
 
-
-  Future<void> editProduct(String token, int id,FormData formData) async {
+  Future<void> editProduct(String token, int id, FormData formData) async {
     DataService dataService = DataService(Dio());
-    await dataService.editProduct(token, id,formData);
+    await dataService.editProduct(token, id, formData);
     notifyListeners();
   }
 
-  Future<void> addComment(String token,FormData formData){
+  Future<void> addComment(String token, FormData formData) {
     DataService dataService = DataService(Dio());
-    return dataService.addComment(token,formData);
+    return dataService.addComment(token, formData);
   }
 
-  Future<void> addLike(String token,FormData formData){
+  Future<void> addLike(String token, FormData formData) {
     DataService dataService = DataService(Dio());
-    return dataService.addLike(token,formData);
+    return dataService.addLike(token, formData);
   }
 
-  Future<void> removeLike(String token,int id){
+  Future<void> removeLike(String token, int id) {
     DataService dataService = DataService(Dio());
-    return dataService.removeLike(token,id);
+    return dataService.removeLike(token, id);
   }
 
-  Future <DataHome> sortBy(FormData formData)
-  {
+  Future<DataHome> sortBy(FormData formData) {
     DataService dataService = DataService(Dio());
     return dataService.sortBy(formData);
   }
 
-
-  Future<void> logOut(String token)
-  {
+  Future<void> logOut(String token) {
     DataService dataService = DataService(Dio());
     return dataService.logOut(token);
   }
 
-  Future<UserProducts> getUserProducts(int id)
-  {
-        //??UserSign(id: 1, email: '', name: '', phoneNumber: '', createdAt: '', updatedAt: '', facebook: '');
+  Future<UserProducts> getUserProducts(int id) {
+    //??UserSign(id: 1, email: '', name: '', phoneNumber: '', createdAt: '', updatedAt: '', facebook: '');
     DataService dataService = DataService(Dio());
     return dataService.getUserProducts(id);
   }
 
-
-  Future <void> deleteAccount(String token, int id)
-  {
-    DataService dataService =  DataService(Dio());
+  Future<void> deleteAccount(String token, int id) {
+    DataService dataService = DataService(Dio());
     return dataService.deleteAccount(id, token);
   }
 
-
-  Future <void> deleteComment(int id, String token)
-  {
+  Future<void> deleteComment(int id, String token) {
     DataService dataService = DataService(Dio());
     return dataService.deleteComment(id, token);
   }
 
-  Future <void> updateComment(int id, String token, FormData formData)
-  {
+  Future<void> updateComment(int id, String token, FormData formData) {
     DataService dataService = DataService(Dio());
     return dataService.updateComment(id, token, formData);
   }
-
 
   /////////...........
 
@@ -421,12 +457,11 @@ class ProductsManager extends ChangeNotifier {
     }
   }
 
-void setUser(UserSign userSign) async {
+  void setUser(UserSign userSign) async {
     final box = Boxes.getUserBox();
     await box.put('userData', userSign);
     notifyListeners();
-}
-
+  }
 }
 
 dynamic throwCustomException(DioError? dioError) {

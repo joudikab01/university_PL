@@ -5,7 +5,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'data_services.g.dart';
 
-@RestApi(baseUrl: 'http://127.0.0.1:8000/api')
+@RestApi(baseUrl: 'http://10.0.2.2:8000/api')
 abstract class DataService {
   factory DataService(Dio dio, {String? baseUrl}) {
     return _DataService(dio, baseUrl: baseUrl);
@@ -76,4 +76,7 @@ abstract class DataService {
   @POST('/comments/{id}')
   Future<void> updateComment(@Path("id") int id,
       @Header('Authorization') String token, FormData formData);
+
+  @POST('/auth/with-google')
+  Future<SignUpWithGoogle> signUpWithGoogle(@Body() FormData formData);
 }

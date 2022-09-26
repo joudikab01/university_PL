@@ -10,7 +10,7 @@ part of 'data_services.dart';
 
 class _DataService implements DataService {
   _DataService(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'http://127.0.0.1:8000/api';
+    baseUrl ??= 'http://10.0.2.2:8000/api';
   }
 
   final Dio _dio;
@@ -312,6 +312,22 @@ class _DataService implements DataService {
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     return null;
+  }
+
+  @override
+  Future<SignUpWithGoogle> signUpWithGoogle(formData) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = formData;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SignUpWithGoogle>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/auth/with-google',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SignUpWithGoogle.fromJson(_result.data!);
+    return value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
